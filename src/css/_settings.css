@@ -1,0 +1,11 @@
+:root {
+	--spade: ♠;
+	--heart: ♥;
+	--clover: ♣;
+	--dia: ♦;
+
+	--mark-size: 35px;
+	--card-width: 57mm;
+	--card-height: 89mm;
+	--card-border-radius: 6px;
+}

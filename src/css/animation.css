@@ -1,0 +1,41 @@
+
+.cards {
+	width: 100%;
+	height: 100%;
+}
+
+.card {
+	transform-origin: 50% 200%;
+	margin: 0 auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	transition-property: transform;
+	transition-duration:1s;
+	transition-timing-function: ease-in-out;
+
+
+	&:not(.selected):hover .inner {
+		transform: rotateY( 180deg );
+	}
+}
+
+.name {
+}
+
+.top {
+	.card {
+		@for $i from 1 to 52 {
+			&:nth-child($i):not(.selected) {
+				transform: rotate(calc((360deg / 52) * $i * 2.1)) scale(calc($i * (100 / 52) / 100));
+			}
+		}
+	}
+
+	.selected {
+		transform: rotate(0) rotateY( 0 );
+		z-index: 1;
+	}
+}
