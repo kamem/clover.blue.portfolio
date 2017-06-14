@@ -29,18 +29,26 @@ export class Cards extends React.Component {
 
 	render () {
 
-		const { category } = this.props
+		const { category, width, height } = this.props
 
 		return (
-			<ul className={classNames(styles[category], styles.cards)}>
+			<ul className={classNames(
+				styles[category],
+				styles.cards)}
+			>
 				{(() => {
 					const cards = []
 					_.each(this.state.marks, (mark, name) => {
 						for(var i = 1;i <= 13;i++) {
-							cards.push(<Card {...{mark, name, num: i, key: name + i}} />)
+							cards.push(<Card {...{
+								mark,
+								name,
+								num: i,
+
+								key: name + i
+							}} />)
 						}
 					})
-					console.log(cards)
 					return cards
 				})()}
 			</ul>
@@ -54,7 +62,9 @@ export class Cards extends React.Component {
 export class Card extends React.Component {
 
 	componentWillMount() {
-		this.setState({ selected: false})
+		this.setState({
+			selected: false
+		})
 	}
 
 	render() {

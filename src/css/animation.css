@@ -1,3 +1,8 @@
+@import "settings";
+
+:root {
+	--radius: 500px;
+}
 
 .cards {
 	width: 100%;
@@ -5,14 +10,14 @@
 }
 
 .card {
-	transform-origin: 50% 200%;
-	margin: 0 auto;
-	top: 0;
+	transform-origin: 50% calc(var(--card-height) + var(--radius));
+	margin: auto;
+	top: calc(var(--card-height) / -2 - var(--radius));
 	right: 0;
-	bottom: 0;
+	bottom: calc(var(--card-height) / 2 + var(--radius));
 	left: 0;
 
-	transition-property: transform;
+	transition-property: all;
 	transition-duration:1s;
 	transition-timing-function: ease-in-out;
 
@@ -29,13 +34,16 @@
 	.card {
 		@for $i from 1 to 52 {
 			&:nth-child($i):not(.selected) {
-				transform: rotate(calc((360deg / 52) * $i * 2.1)) scale(calc($i * (100 / 52) / 100));
+				transform: rotate(calc((360deg / 52) * $i * 4)) scale(calc($i * (100 / 52) / 180 + 0.05));
 			}
 		}
 	}
 
 	.selected {
+		transform-origin: 50%;
 		transform: rotate(0) rotateY( 0 );
+		top: 0;
+		bottom: 0;
 		z-index: 1;
 	}
 }
