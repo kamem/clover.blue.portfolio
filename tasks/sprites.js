@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var spritesmith = require('gulp.spritesmith');
 var config = require('../config');
-var fs = require('fs');
+var fs = require('graceful-fs');
 var path = require('path');
 var getFolders = (dir) => {
 	return fs.readdirSync(dir).filter(function (file) {

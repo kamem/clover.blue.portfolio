@@ -48,7 +48,16 @@ gulp.task('webpack', () => {
 					new webpack.webpack.ResolverPlugin([
 						new webpack.webpack.ResolverPlugin.DirectoryDescriptionFilePlugin( "bower.json", ["main", ["main", "1"]] )
 					])
-				]
+				],
+				externals: {
+					"lodash": "_",
+					"react": "React",
+					"react-dom": "ReactDOM",
+					"react-router": "ReactRouter",
+					"redux": "Redux",
+					"react-redux": "ReactRedux",
+					"history": "History"
+				},
 			}))
 			.pipe(gulpif(args.minify === 'true', minifyJs()))
 			.pipe(rename({basename: 'app'}))

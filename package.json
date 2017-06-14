@@ -3,10 +3,10 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "watch": "gulp",
-    "build": "gulp build --minify=true",
-    "sprites": "gulp sprites",
-    "svgfonts": "gulp svgfonts"
+    "watch": "$(npm bin)/gulp",
+    "build": "$(npm bin)/gulp build --minify=true",
+    "sprites": "$(npm bin)/gulp sprites",
+    "svgfonts": "$(npm bin)/gulp svgfonts"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
@@ -17,7 +17,7 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-clean-css": "^2.0.10",
-    "gulp-connect": "^4.1.0",
+    "gulp-connect": "^5.0.0",
     "gulp-consolidate": "^0.2.0",
     "gulp-iconfont": "^8.0.1",
     "gulp-if": "^2.0.1",
