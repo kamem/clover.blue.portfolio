@@ -3,10 +3,11 @@ var watch = require('gulp-watch');
 
 var config = require('../config');
 
-gulp.task('watch', ['webpack', 'postcss', 'imgCopy', 'fontCopy', 'usemin'], function(){
+gulp.task('watch', ['webpack', 'postcss', 'imgCopy', 'fontCopy', 'htmlCopy', 'nodemon', 'script'], function(){
 	gulp.watch(config.css.files, ['postcss', 'webpack']);
-	gulp.watch(config.js.files, ['webpack', 'usemin']);
-	gulp.watch(config.html.files, ['usemin']);
+	gulp.watch(config.js.files, ['webpack']);
+	gulp.watch(config.server.files, ['serverJsCopy']);
+	gulp.watch(config.html.files, ['htmlCopy']);
 	gulp.watch(config.img.files, ['imgCopy']);
 	gulp.watch(config.font.files, ['fontCopy']);
 });

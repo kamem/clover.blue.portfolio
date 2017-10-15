@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import Cards from './Cards';
 
 class Main extends React.Component {
-
 	componentWillMount() {
 		this.setState({
 			width: window.innerWidth,
@@ -30,9 +29,9 @@ class Main extends React.Component {
 			}
 		)
 
-
 		const { category } = this.props.route
 		const { width, height } = this.state
+		var test = 'test'
 		return (
 			<main id="main">
 				<article>

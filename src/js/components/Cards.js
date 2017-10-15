@@ -28,7 +28,6 @@ export class Cards extends React.Component {
 	}
 
 	render () {
-
 		const { category, width, height } = this.props
 
 		return (
