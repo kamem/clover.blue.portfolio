@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+	<channel>
+		<title><%= title %></title>
+		<link>http://clover.blue/</link>
+		<description>HTML, CSS, Javascript, デザインの記事や日記を書いたり。写真やイラストを載せています。</description>
+		<language>ja</language>
+		<copyright>Copyright © <%= title %> All Rights Reserved.</copyright>
+		<lastBuildDate></lastBuildDate>
+
+		<% for(var i = 0;i < qiita.length;i++) { %>
+		<item>
+			<title><%= qiita[i].title %></title>
+			<% for(var j = 0;j < qiita[i].tags.length;j++) { %>
+			<category><%= qiita[i].tags[j] %></category>
+			<% } %>
+			<description><![CDATA[<%- qiita[i].body %>]]></description>
+			<link>http://clover.blue/items/<%= qiita[i].uuid %></link>
+			<guid>http://clover.blue/items/<%= qiita[i].uuid %></guid>
+			<pubDate><%= new Date(parseInt(qiita[i].updated)) %></pubDate>
+		</item>
+		<% } %>
+
+
+		<% for(var i = 0;i < tumblr.length;i++) { %>
+		<% if(tumblr[i].type !== 'photo') { %>
+		<item>
+			<title><%= tumblr[i].title %></title>
+			<% for(var j = 0;j < tumblr[i].tags.length;j++) { %>
+			<category><%= tumblr[i].tags[j] %></category>
+			<% } %>
+			<description><![CDATA[<%- tumblr[i].body %>]]></description>
+			<link>http://clover.blue/post/<%= tumblr[i].uuid %></link>
+			<guid>http://clover.blue/post/<%= tumblr[i].uuid %></guid>
+			<pubDate><%= new Date(parseInt(tumblr[i].updated + '000')) %></pubDate>
+		</item>
+		<% } %>
+		<% } %>
+
+
+
+		<% for(var i = 0;i < tumblrDesigns.length;i++) { %>
+		<item>
+			<title></title>
+			<description><![CDATA[
+				<img src="<%= tumblrDesigns[i].url %>">
+				<%- tumblrDesigns[i].title %>
+				]]></description>
+			<link>http://clover.blue/design</link>
+			<guid>http://clover.blue/design</guid>
+			<pubDate><%= new Date(parseInt(tumblrDesigns[i].updated + '000')) %></pubDate>
+		</item>
+		<% } %>
+
+
+		<% for(var i = 0;i < flickr.length;i++) { %>
+		<item>
+			<title><%= flickr[i].title %></title>
+			<description><![CDATA[
+				<img src="http://farm<%= flickr[i].farm %>.staticflickr.com/<%= flickr[i].server %>/<%= flickr[i].uuid %>_<%= flickr[i].secret %>_b.jpg">
+				]]></description>
+			<link>http://clover.blue/photo</link>
+			<guid>http://clover.blue/photo</guid>
+			<pubDate><%= new Date(parseInt(flickr[i].updated + '000')) %></pubDate>
+		</item>
+		<% } %>
+
+
+		<% for(var i = 0;i < pixiv.length;i++) { %>
+		<item>
+			<title><%= pixiv[i].title %></title>
+			<description><![CDATA[
+				<img src="<%= pixiv[i].img %>">
+				]]></description>
+			<link>http://clover.blue/illust</link>
+			<guid>http://clover.blue/illust</guid>
+			<pubDate><%= new Date(parseInt(pixiv[i].updated)) %></pubDate>
+		</item>
+		<% } %>
+	</channel>
+</rss>

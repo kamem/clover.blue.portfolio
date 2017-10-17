@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // utils
@@ -12,101 +11,107 @@ import { connect } from 'react-redux'
 // Components
 
 // styles
-import styles  from '../../css/animation.css'
+import styles from '../../css/animation.css'
 
 export class Cards extends React.Component {
 
-	componentWillMount() {
-		this.setState({
-			marks: {
-				spade: '♠',
-				heart: '♥',
-				clover: '♣',
-				dia: '♦'
-			}
-		})
-	}
+  componentWillMount() {
+    this.setState({
+      marks: {
+        spade: '♠',
+        heart: '♥',
+        clover: '♣',
+        dia: '♦'
+      }
+    })
+  }
 
-	render () {
+  render() {
+    const { category } = this.props
 
-		const { category, width, height } = this.props
+    console.log(category, 'test')
+    console.log('test')
+    console.log('test')
+    console.log('test')
+    console.log('test')
+    console.log('test')
 
-		return (
-			<ul className={classNames(
-				styles[category],
-				styles.cards)}
-			>
-				{(() => {
-					const cards = []
-					_.each(this.state.marks, (mark, name) => {
-						for(var i = 1;i <= 13;i++) {
-							cards.push(<Card {...{
-								mark,
-								name,
-								num: i,
+    return (
+      <ul className={classNames(
+        styles[category],
+        styles.cards)}
+      >
+        {(() => {
+          const cards = []
+          _.each(this.state.marks, (mark, name) => {
+            for(let i = 1; i <= 13; i++) {
+              cards.push(<Card {...{
+                mark,
+                name,
+                num: i,
 
-								key: name + i
-							}} />)
-						}
-					})
-					return cards
-				})()}
-			</ul>
-		);
-	}
+                key: name + i
+              }}
+              />)
+            }
+          })
+          return cards
+        })()}
+      </ul>
+    );
+  }
 
-	componentDidMount() {
-	}
+  componentDidMount() {
+  }
 }
 
 export class Card extends React.Component {
 
-	componentWillMount() {
-		this.setState({
-			selected: false
-		})
-	}
+  componentWillMount() {
+    this.setState({
+      selected: false
+    })
+  }
 
-	render() {
-		const { mark, num, name } = this.props
-		const { selected } = this.state
+  render() {
+    const { mark, num, name } = this.props
+    const { selected } = this.state
 
-		return (
-			<li className={classNames(
-					{[styles.selected]: selected},
-					styles.card,
-					styles[name],
-					styles[`${mark}_${num}`],
-					styles[`num_${num}`],
+    return (
+      <li
+        className={classNames(
+        { [styles.selected]: selected },
+        styles.card,
+        styles[name],
+        styles[`${mark}_${num}`],
+        styles[`num_${num}`],
 
-					'card',
-					mark,
-					`${mark}_${num}`,
-					`num_${num}`
-				)}
-				onClick={() => {
-					return this.setState({selected: !selected})
-				}}
-			>
-				<div className={classNames(styles.inner, 'inner')}>
-					<div className="front">
-						<i className="mark">{mark}</i>
-					</div>
-					<div className="back"></div>
-				</div>
-			</li>
-		)
-	}
+        'card',
+        mark,
+        `${mark}_${num}`,
+        `num_${num}`
+      )}
+        onClick={() => this.setState({ selected: !selected })}
+      >
+        <div className={classNames(styles.inner, 'inner')}>
+          <div className="front">
+            <i className="mark">{mark}</i>
+          </div>
+          <div className="back" />
+        </div>
+      </li>
+    )
+  }
 }
 
-function mapStateToProps(state) {
-	return {
-	}
+function mapStateToProps() {
+  return {
+  }
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-	}
+function mapDispatchToProps() {
+  return {
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)

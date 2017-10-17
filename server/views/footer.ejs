@@ -1,0 +1,27 @@
+<% if (env === 'development') { %>
+<script src="//localhost:1341/js/bundle.js"></script>
+<% } else { %>
+<script src="js/bundle.js"></script>
+<% } %>
+
+<script>
+  var qiita = [];
+  <% for(var i = 0;i < qiita.length;i++) { %>
+  qiita[<%= i %>] = {uuid: '<%= qiita[i].uuid %>', title: '<%= qiita[i].title %>', updated: <%= qiita[i].updated %>};
+  <% } %>
+  var flickr = [];
+  <% for(var i = 0;i < 1;i++) { %>
+  flickr[<%= i %>] = {uuid: '<%= flickr[i].uuid %>', title: '<%= flickr[i].title %>', updated: <%= flickr[i].updated %>};
+  <% } %>
+  var pixiv = [];
+  <% for(var i = 0;i < pixiv.length;i++) { %>
+  pixiv[<%= i %>] = {uuid: '<%= pixiv[i].uuid %>', title: '<%= pixiv[i].title %>', updated: <%= pixiv[i].updated %>, img: '<%= pixiv[i].img %>', thumbnail: '<%= pixiv[i].thumbnail %>'};
+  <% } %>
+  var tumblr = [];
+  <% for(var i = 0;i < tumblr.length;i++) { %>
+  tumblr[<%= i %>] = {uuid: '<%= tumblr[i].uuid %>', title: '<%= tumblr[i].title %>', updated: <%= tumblr[i].updated %>};
+  <% } %>
+</script>
+
+</body>
+</html>
