@@ -49,6 +49,9 @@ const webpackConfig = {
   }
 }
 
+if(process.env.NODE_ENV === 'development') {
+  webpackConfig.devtool = 'inline-source-map'
+}
 
 if(process.env.LINT === 'true') {
   webpackConfig.module.loaders.push(

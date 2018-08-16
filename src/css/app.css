@@ -1,23 +1,174 @@
 @import "_settings";
-@import "_mixin";
-@import "_card";
+
+html {
+  overflow-y: scroll;
+}
 
 html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+body,
+#root {
+  min-height: 100%;
 }
 
 * {
   margin: 0;
   padding: 0;
+      font-family: "秀英丸ゴシック L", "Shuei MaruGo L", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
 }
 
 i {
   font-style: normal;
 }
 
-li {
+ul li {
   list-style-type: none;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: calc(var(--content--max-width) + 7.5%);
+
+
+  li,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  pre,
+  table {
+    margin: 0 5%;
+    line-height: 1.9;
+    font-weight: normal;
+    position: relative;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    letter-spacing: 0.13em;
+    text-decoration: none;
+    color: #555;
+
+    li,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    table {
+      margin: 0;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+
+  pre {
+    margin-bottom: 24px;
+    letter-spacing: 0.13em;
+    color: #666;
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+  }
+
+  h2 {
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+
+  li {
+    margin-left: 9%;
+    border: none;
+    &:last-child {
+      margin-bottom: 56px;
+    }
+
+    li {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  a {
+    padding: 6px 0;
+    display: inline-block;
+    text-decoration: underline;
+    font-size: 15px;
+    letter-spacing: 0.13em;
+    color: #666;
+    &:hover {
+      opacity: 0.6;
+      .tags {
+        opacity: 1;
+      }
+    }
+  }
+
+  ul li {
+    box-sizing: border-box;
+    &:before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--main-color);
+      display: block;
+      position: absolute;
+      top: 1em;
+      left: -24px;
+      margin: auto 0;
+    }
+  }
+
+  table {
+    font-size: 16px;
+    margin-bottom: 25px;
+    border-collapse: collapse;
+    overflow: auto;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+
+    th,
+    td {
+      padding: 4px 16px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+    }
+
+    tr:nth-child(odd) td {
+      background-color: #f9f9f9;
+    }
+    th {
+      background-color: #666;
+      color: #fff;
+    }
+
+    @media screen and (max-width: 40.625rem) {
+      table-layout: fixed;
+    }
+  }
+
+  blockquote {
+    padding-top: 16px;
+    margin-bottom: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-left: 4px solid #ddd;
+    overflow: auto;
+    > * {
+      color: #777;
+    }
+  }
 }

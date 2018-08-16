@@ -1,0 +1,17 @@
+@import "settings";
+
+.about {
+  overflow: hidden;
+  padding: 1px 0;
+  box-sizing: border-box;
+  height: 700px;
+  position: relative;
+}
+
+.title {
+  padding: 64px 0;
+  color: var(--main-color);
+  font-weight: normal;
+  font-size: 32px;
+  text-align: center;
+}

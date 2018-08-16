@@ -1,7 +1,8 @@
-import QiitaApi from '../api/QiitaApi'
+import Qiita from '../api/Qiita'
 
-const qiitaApi = new QiitaApi();
-qiitaApi.saveEntries().then(() => {
+const api = new Qiita()
+
+api.saveEntries().then(() => {
   console.log('complated!!')
   process.exit(0)
 }).catch((err) => {

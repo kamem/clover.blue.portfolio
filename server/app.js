@@ -6,22 +6,29 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import csrf from 'csurf'
 import path from 'path'
+import paginate from 'express-paginate'
 
+import pages from './routes/pages'
 import * as post from './routes/post'
 import {
   qiitaItems,
   qiitaTags,
-  tumblrItems,
-  tumblrTags
+  dropbox_paperItems,
+  dropbox_paperTags,
 } from './db'
 
-const app = express();
+import Qiita from './api/Qiita'
+const qiita = new Qiita()
+import DropboxApi from './api/Dropbox'
+const dropbox = new DropboxApi()
 
+const app = express();
 
 // middleware
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(paginate.middleware(10, 50))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -49,37 +56,67 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 
 // routing
-app.get('/', post.index);
-app.get('/about', post.about);
+app.get('/update/qiita', (req, res) => {
+  if(!req.query.api_key) {
+    return res.status(400).send('パラメーターが間違ってるよ')
+  }
+
+  qiita.API_KEY = req.query.api_key
+  qiita.saveEntries().then((values) => {
+    console.log('complated!!')
+    res.json(values)
+  }).catch((err) => {
+    console.log(err)
+    return res.status(500).send('Something broke!')
+  })
+})
+app.get('/update/dropbox', (req, res) => {
+  if(!req.query.api_key) {
+    return res.status(400).send('パラメーターが間違ってるよ')
+  }
+
+  dropbox.API_KEY = req.query.api_key
+  dropbox.saveEntries().then((values) => {
+    console.log('complated!!')
+    res.json(values)
+  }).catch((err) => {
+    console.log(err)
+    return res.status(500).send('Something broke!')
+  })
+})
+
+pages.forEach((page) => {
+  app[page.method](page.url, page.complete)
+})
+
+qiitaItems.find({}, (err, posts) => {
+  posts.forEach(({ uuid }) => {
+    app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, 'items', 'qiitaItems'));
+  })
+})
+dropbox_paperItems.find({}, (err, posts) => {
+  posts.forEach(({ uuid }) => {
+    app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, 'doc', 'dropbox_paperItems'))
+  })
+})
+
 app.get('/photo', post.photo);
 app.get('/weblog', post.weblog);
 app.get('/illust', post.illust);
 app.get('/diary', post.diary);
 app.get('/design', post.design);
-qiitaItems.find({}, (err, posts) => {
-  posts.forEach(({ uuid }) => {
-    app.get(`/items/${uuid}`, post.entry);
-  })
-});
+
 
 qiitaTags.find({}, (err, posts) => {
   posts.forEach(({ name }) => {
-    app.get(`/weblog/tags/${encodeURI(name)}`, post.tag);
+    app.get(`/tags/${encodeURI(name)}`, post.index);
   })
-});
-tumblrItems.find({}, (err, posts) => {
-  posts.forEach(({ uuid }) => {
-    app.get(`/post/${uuid}`, post.diaryEntry);
-  })
-});
-tumblrTags.find({}, (err, posts) => {
+})
+dropbox_paperTags.find({}, (err, posts) => {
   posts.forEach(({ name }) => {
-    app.get(`/diary/tags/${encodeURI(name)}`, post.tag);
+    app.get(`/tags/${encodeURI(name)}`, post.index);
   })
-});
-
-// template
-app.get('/template/*', post.template);
+})
 
 // feed
 app.get('/feed', post.feed);

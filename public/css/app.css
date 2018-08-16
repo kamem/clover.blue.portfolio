@@ -1,531 +1,164 @@
-.test {
-  background: red;
+html {
+  overflow-y: scroll;
 }
-.♥, .♦ {
-  color: red;
-}
-.♣ {
-  color: #3bbfce;
-}
-.card {
-  width: 228px;
-  height: 356px;
 
-  perspective: 1000;
-  position: absolute;
+html, body, #root {
+  min-height: 100%;
 }
-.inner {
-  width: 228px;
-  height: 356px;
-  border-radius: 6px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-style:preserve-3d;
-  font-family: helvetica;
-  transition: all 1s ease;
-  transform-style: preserve-3d;
-  transition: .6s;
-}
-.front, .back {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  border-radius: 6px;
-}
-.front {
-  background-image: linear-gradient(#fff, #f5f5f5);
-  transform: rotateY(0);
-  display: table;
-  vertical-align: middle;
-  overflow: hidden;
-}
-.front:before, .front:after {
-  display: block;
-  padding: 10px;
-  width: 100%;
-  position: absolute;
-  white-space: pre;
-  display: block;
-  -webkit-box-reflect: right;
-  box-sizing: border-box;
-  line-height: 1.4;
-  text-align: left;
-  font-size: 20px;
-}
-.front:before {
-  top: 0;
-  left: 0;
-}
-.front:after {
-  right: 0;
-  bottom: 0;
-  transform:rotate(-180deg);
-}
-.back {
-  background-image: linear-gradient(#fff, #f5f5f5);
-  transform: rotateY(-180deg);
 
-  background-color: #888;
-  background-image: linear-gradient(45deg, #444 25%, transparent 25%, transparent 75%, #444 75%, #444), linear-gradient(-45deg, #444 25%, transparent 25%, transparent 75%, #444 75%, #444);
-  background-size: 25px 25px;
-}
-.front {
-
-}
-.♠_1 .front:before, .♠_1 .front:after {
-  content: 'A\A♠';
-}
-.♥_1 .front:before, .♥_1 .front:after {
-  content: 'A\A♥';
-}
-.♣_1 .front:before, .♣_1 .front:after {
-  content: 'A\A♣';
-}
-.♦_1 .front:before, .♦_1 .front:after {
-  content: 'A\A♦';
-}
-.♠_2 .front:before, .♠_2 .front:after {
-    content: '2\A♠';
-  }
-.♥_2 .front:before, .♥_2 .front:after {
-    content: '2\A♥';
-  }
-.♣_2 .front:before, .♣_2 .front:after {
-    content: '2\A♣';
-  }
-.♦_2 .front:before, .♦_2 .front:after {
-    content: '2\A♦';
-  }
-.♠_3 .front:before, .♠_3 .front:after {
-    content: '3\A♠';
-  }
-.♥_3 .front:before, .♥_3 .front:after {
-    content: '3\A♥';
-  }
-.♣_3 .front:before, .♣_3 .front:after {
-    content: '3\A♣';
-  }
-.♦_3 .front:before, .♦_3 .front:after {
-    content: '3\A♦';
-  }
-.♠_4 .front:before, .♠_4 .front:after {
-    content: '4\A♠';
-  }
-.♥_4 .front:before, .♥_4 .front:after {
-    content: '4\A♥';
-  }
-.♣_4 .front:before, .♣_4 .front:after {
-    content: '4\A♣';
-  }
-.♦_4 .front:before, .♦_4 .front:after {
-    content: '4\A♦';
-  }
-.♠_5 .front:before, .♠_5 .front:after {
-    content: '5\A♠';
-  }
-.♥_5 .front:before, .♥_5 .front:after {
-    content: '5\A♥';
-  }
-.♣_5 .front:before, .♣_5 .front:after {
-    content: '5\A♣';
-  }
-.♦_5 .front:before, .♦_5 .front:after {
-    content: '5\A♦';
-  }
-.♠_6 .front:before, .♠_6 .front:after {
-    content: '6\A♠';
-  }
-.♥_6 .front:before, .♥_6 .front:after {
-    content: '6\A♥';
-  }
-.♣_6 .front:before, .♣_6 .front:after {
-    content: '6\A♣';
-  }
-.♦_6 .front:before, .♦_6 .front:after {
-    content: '6\A♦';
-  }
-.♠_7 .front:before, .♠_7 .front:after {
-    content: '7\A♠';
-  }
-.♥_7 .front:before, .♥_7 .front:after {
-    content: '7\A♥';
-  }
-.♣_7 .front:before, .♣_7 .front:after {
-    content: '7\A♣';
-  }
-.♦_7 .front:before, .♦_7 .front:after {
-    content: '7\A♦';
-  }
-.♠_8 .front:before, .♠_8 .front:after {
-    content: '8\A♠';
-  }
-.♥_8 .front:before, .♥_8 .front:after {
-    content: '8\A♥';
-  }
-.♣_8 .front:before, .♣_8 .front:after {
-    content: '8\A♣';
-  }
-.♦_8 .front:before, .♦_8 .front:after {
-    content: '8\A♦';
-  }
-.♠_9 .front:before, .♠_9 .front:after {
-    content: '9\A♠';
-  }
-.♥_9 .front:before, .♥_9 .front:after {
-    content: '9\A♥';
-  }
-.♣_9 .front:before, .♣_9 .front:after {
-    content: '9\A♣';
-  }
-.♦_9 .front:before, .♦_9 .front:after {
-    content: '9\A♦';
-  }
-.♠_10 .front:before, .♠_10 .front:after {
-    content: '10\A♠';
-  }
-.♥_10 .front:before, .♥_10 .front:after {
-    content: '10\A♥';
-  }
-.♣_10 .front:before, .♣_10 .front:after {
-    content: '10\A♣';
-  }
-.♦_10 .front:before, .♦_10 .front:after {
-    content: '10\A♦';
-  }
-.♠_11 .front:before, .♠_11 .front:after {
-    content: '11\A♠';
-  }
-.♥_11 .front:before, .♥_11 .front:after {
-    content: '11\A♥';
-  }
-.♣_11 .front:before, .♣_11 .front:after {
-    content: '11\A♣';
-  }
-.♦_11 .front:before, .♦_11 .front:after {
-    content: '11\A♦';
-  }
-.♠_12 .front:before, .♠_12 .front:after {
-    content: '12\A♠';
-  }
-.♥_12 .front:before, .♥_12 .front:after {
-    content: '12\A♥';
-  }
-.♣_12 .front:before, .♣_12 .front:after {
-    content: '12\A♣';
-  }
-.♦_12 .front:before, .♦_12 .front:after {
-    content: '12\A♦';
-  }
-.♠_13 .front:before, .♠_13 .front:after {
-    content: '13\A♠';
-  }
-.♥_13 .front:before, .♥_13 .front:after {
-    content: '13\A♥';
-  }
-.♣_13 .front:before, .♣_13 .front:after {
-    content: '13\A♣';
-  }
-.♦_13 .front:before, .♦_13 .front:after {
-    content: '13\A♦';
-  }
-/* mark */
-.mark {
-  font-size: 35px;
-  white-space: pre;
-  text-align: center;
-  display: block;
-}
-.mark:before, .mark:after {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.♠ .mark:before {
-  content: '♠';
-}
-.♥ .mark:before {
-  content: '♥';
-}
-.♣ .mark:before {
-  content: '♣';
-}
-.♦ .mark:before {
-  content: '♦';
-}
-/* number1 */
-.num_1 .mark {
-  display: table-cell;
-  vertical-align: middle;
-}
-.num_1 .mark:before {
-  display: none;
-}
-/* number2 */
-.num_2 .mark {
-  line-height: calc(356px / 2);
-  -webkit-box-reflect: below;
-  vertical-align: top;
-  display: block;
-}
-.num_2 .mark:before {
-  display: none;
-}
-/* number3 */
-.num_3 .mark, .num_6 .mark {
-  line-height: 356px;
-  position: relative;
-}
-.num_3 .mark:before, .num_6 .mark:before {
-  line-height: calc(356px / 2);
-  -webkit-box-reflect: below;
-  vertical-align: top;
-  right: 0;
-  width: 100%;
-}
-/* number4 */
-.♠.num_4 .mark:before {
-  content: '♠       ♠';
-}
-.♥.num_4 .mark:before {
-  content: '♥       ♥';
-}
-.♣.num_4 .mark:before {
-  content: '♣       ♣';
-}
-.♦.num_4 .mark:before {
-  content: '♦       ♦';
-}
-.num_4 .mark, .num_5 .mark, .num_7 .mark, .num_8 .mark {
-  text-indent: -9999px;
-}
-.num_4 .mark:before, .num_5 .mark:before, .num_7 .mark:before, .num_8 .mark:before {
-  line-height: calc(356px / 2);
-  text-indent: 0;
-  width: 100%;
-  text-align: center;
-  -webkit-box-reflect: below;
-}
-/* number5 */
-.♠.num_5 .mark:before {
-  content: '♠       ♠';
-}
-.♥.num_5 .mark:before {
-  content: '♥       ♥';
-}
-.♣.num_5 .mark:before {
-  content: '♣       ♣';
-}
-.♦.num_5 .mark:before {
-  content: '♦       ♦';
-}
-.num_5 .mark, .num_7 .mark, .num_8 .mark {
-  text-indent: 0;
-  line-height: calc(356px);
-}
-/* number6 */
-.num_6 .mark {
-  width: 50%;
-  -webkit-box-reflect: right;
-}
-/* number7 */
-.♠.num_7 .mark:before {
-  content: '♠       ♠';
-}
-.♠.num_7 .mark:after {
-  content: '♠';
-}
-.♥.num_7 .mark:before {
-  content: '♥       ♥';
-}
-.♥.num_7 .mark:after {
-  content: '♥';
-}
-.♣.num_7 .mark:before {
-  content: '♣       ♣';
-}
-.♣.num_7 .mark:after {
-  content: '♣';
-}
-.♦.num_7 .mark:before {
-  content: '♦       ♦';
-}
-.♦.num_7 .mark:after {
-  content: '♦';
-}
-.num_7 .mark {
-  line-height: calc(356px / 1.3);
-}
-.num_7 .mark:after {
-  width: 50%;
-  line-height: calc(356px);
-  -webkit-box-reflect: right;
-}
-/* number8 */
-.♠.num_8 .mark:before {
-  top: calc(356px / 8 * 1.5);
-  content: '♠       ♠\A♠';
-  line-height: calc(356px / 8);
-}
-.♠.num_8 .mark:after {
-  content: '♠';
-}
-.♥.num_8 .mark:before {
-  top: calc(356px / 8 * 1.5);
-  content: '♥       ♥\A♥';
-  line-height: calc(356px / 8);
-}
-.♥.num_8 .mark:after {
-  content: '♥';
-}
-.♣.num_8 .mark:before {
-  top: calc(356px / 8 * 1.5);
-  content: '♣       ♣\A♣';
-  line-height: calc(356px / 8);
-}
-.♣.num_8 .mark:after {
-  content: '♣';
-}
-.♦.num_8 .mark:before {
-  top: calc(356px / 8 * 1.5);
-  content: '♦       ♦\A♦';
-  line-height: calc(356px / 8);
-}
-.♦.num_8 .mark:after {
-  content: '♦';
-}
-.num_8 .mark {
-  text-indent: -9999px;
-}
-.num_8 .mark:before {
-  -webkit-box-reflect: below calc(356px / 8);
-}
-.num_8 .mark:after {
-  width: 50%;
-  text-indent: 0;
-  line-height: calc(356px);
-  -webkit-box-reflect: right;
-}
-/* number9 */
-.♠.num_9 .mark:before {
-  content: '♠       ♠\A♠       ♠';
-}
-.♥.num_9 .mark:before {
-  content: '♥       ♥\A♥       ♥';
-}
-.♣.num_9 .mark:before {
-  content: '♣       ♣\A♣       ♣';
-}
-.♦.num_9 .mark:before {
-  content: '♦       ♦\A♦       ♦';
-}
-.num_9 .mark {
-  display: table-cell;
-  vertical-align: middle;
-}
-.num_9 .mark:before {
-  line-height: calc(356px / 5);
-  width: 100%;
-  text-align: center;
-  top: calc(356px / 5 / 2);
-  -webkit-box-reflect: below;
-}
-/* num 10 */
-.♠.num_10 .mark:before {
-  content: '♠       ♠\A♠       ♠';
-}
-.♥.num_10 .mark:before {
-  content: '♥       ♥\A♥       ♥';
-}
-.♣.num_10 .mark:before {
-  content: '♣       ♣\A♣       ♣';
-}
-.♦.num_10 .mark:before {
-  content: '♦       ♦\A♦       ♦';
-}
-.num_10 .mark {
-  height: 50%;
-  line-height: calc(356px / 5 * 3);
-  -webkit-box-reflect: below;
-}
-.num_10 .mark:before {
-  line-height: calc(356px / 5);
-  width: 100%;
-  text-align: center;
-  top: calc(356px / 5 / 2);
-}
-.♠.num_11 .mark:after, .♠.num_12 .mark:after, .♠.num_13 .mark:after {
-  content: '♠';
-}
-.♥.num_11 .mark:after, .♥.num_12 .mark:after, .♥.num_13 .mark:after {
-  content: '♥';
-}
-.♣.num_11 .mark:after, .♣.num_12 .mark:after, .♣.num_13 .mark:after {
-  content: '♣';
-}
-.♦.num_11 .mark:after, .♦.num_12 .mark:after, .♦.num_13 .mark:after {
-  content: '♦';
-}
-.num_11 .mark, .num_12 .mark, .num_13 .mark {
-  text-indent: -9999px;
-}
-.num_11 .mark:before, .num_12 .mark:before, .num_13 .mark:before {
-  text-indent: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 6em;
-  font-weight: bold;
-  line-height: calc(356px);
-}
-.num_11 .mark:after, .num_12 .mark:after, .num_13 .mark:after {
-  text-indent: 0;
-  font-size: 45px;
-  width: 100%;
-  line-height: calc(356px);
-}
-/* num 11 */
-.num_11 .mark:before {
-  content: "J";
-}
-.num_11 .mark:after {
-  top: -18px;
-  left: -38px;
-}
-/* num 12 */
-.num_12 .mark:before {
-  content: "Q";
-}
-.num_12 .mark:after {
-  top: -3px;
-}
-/* num 13 */
-.num_13 .mark:before {
-  content: "K";
-}
-.num_13 .mark:after {
-  top: -10px;
-  left: 50px;
-}
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 * {
   margin: 0;
   padding: 0;
+      font-family: "秀英丸ゴシック L", "Shuei MaruGo L", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
 }
+
 i {
   font-style: normal;
 }
-li {
+
+ul li {
   list-style-type: none;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: calc(40.625rem + 7.5%);
+}
+
+.content li, .content h2, .content h3, .content h4, .content h5, .content p, .content pre, .content table {
+  margin: 0 5%;
+  line-height: 1.9;
+  font-weight: normal;
+  position: relative;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  color: #555;
+}
+
+.content li li, .content li h2, .content li h3, .content li h4, .content li h5, .content li p, .content li table, .content h2 li, .content h2 h2, .content h2 h3, .content h2 h4, .content h2 h5, .content h2 p, .content h2 table, .content h3 li, .content h3 h2, .content h3 h3, .content h3 h4, .content h3 h5, .content h3 p, .content h3 table, .content h4 li, .content h4 h2, .content h4 h3, .content h4 h4, .content h4 h5, .content h4 p, .content h4 table, .content h5 li, .content h5 h2, .content h5 h3, .content h5 h4, .content h5 h5, .content h5 p, .content h5 table, .content p li, .content p h2, .content p h3, .content p h4, .content p h5, .content p p, .content p table, .content pre li, .content pre h2, .content pre h3, .content pre h4, .content pre h5, .content pre p, .content pre table, .content table li, .content table h2, .content table h3, .content table h4, .content table h5, .content table p, .content table table {
+  margin: 0;
+}
+
+.content img {
+  width: 100%;
+}
+
+.content pre {
+  margin-bottom: 24px;
+  letter-spacing: 0.13em;
+  color: #666;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.content h2 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.content h3 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.content p {
+  margin-bottom: 32px;
+  font-size: 15px;
+}
+
+.content li {
+  margin-left: 9%;
+  border: none;
+}
+
+.content li:last-child {
+  margin-bottom: 56px;
+}
+
+.content li li {
+  margin-bottom: 0 !important;
+}
+
+.content a {
+  padding: 6px 0;
+  display: inline-block;
+  text-decoration: underline;
+  font-size: 15px;
+  letter-spacing: 0.13em;
+  color: #666;
+}
+
+.content a:hover {
+  opacity: 0.6;
+}
+
+.content a:hover .tags {
+  opacity: 1;
+}
+
+.content ul li {
+  box-sizing: border-box;
+}
+
+.content ul li:before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #3bbfce;
+  display: block;
+  position: absolute;
+  top: 1em;
+  left: -24px;
+  margin: auto 0;
+}
+
+.content table {
+  font-size: 16px;
+  margin-bottom: 25px;
+  border-collapse: collapse;
+  overflow: auto;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content table th, .content table td {
+  padding: 4px 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.content table tr:nth-child(odd) td {
+  background-color: #f9f9f9;
+}
+
+.content table th {
+  background-color: #666;
+  color: #fff;
+}
+
+@media screen and (max-width: 40.625rem) {
+
+  .content table {
+    table-layout: fixed
+  }
+}
+
+.content blockquote {
+  padding-top: 16px;
+  margin-bottom: 24px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid #ddd;
+  overflow: auto;
+}
+
+.content blockquote > * {
+  color: #777;
 }

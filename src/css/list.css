@@ -1,0 +1,68 @@
+@import "settings";
+
+.list {
+  margin: 0 auto;
+  max-width: var(--content--max-width);
+}
+
+
+.tags {
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 1.3;
+  opacity: 0.2;
+  width: 180px;
+  pointer-events: none;
+  display: none;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 8px;
+  font-size: 10px;
+  color: #fff;
+  background-color: var(--main-color);
+}
+
+.item {
+  line-height: 1.8;
+  position: relative;
+  padding-left: 30px;
+  margin: 1px 0;
+  position: relative;
+  &:before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    display: block;
+    position: absolute;
+    top: 1.1em;
+    left: 10px;
+    margin: auto 0;
+  }
+  &:hover {
+    .tags {
+      opacity: 1;
+    }
+  }
+  a {
+    padding: 6px 0;
+    display: inline-block;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 15px;
+    letter-spacing: 0.13em;
+    text-decoration: none;
+    color: #555;
+    &:hover {
+      opacity: 0.6;
+      .tags {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,19 +1,29 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Route, useRouterHistory } from 'react-router';
-import { createHashHistory } from 'history'
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
-import configureStore from './stores/configureStore';
+import configureStore from './stores/configureStore'
 
 // Components
-import Main from './components/Main';
+import App from './containers/App'
+import Main from './containers/Main'
+import About from './containers/About'
+import Qiita from './containers/Qiita'
+import Dropbox from './containers/Dropbox'
+import Tag from './containers/Tag'
 
-const store = configureStore();
+const store = configureStore()
 
 render(
   <Provider store={store}>
-    <Router history={useRouterHistory(createHashHistory)({ queryKey: false })}>
-      <Route path="/" category="top" component={Main} />
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Main} category="main" />
+        <Route path="items/:item_id" category="item" component={Qiita} />
+        <Route path="doc/:item_id" category="doc" component={Dropbox} />
+        <Route path="tags/:tag_id" category="tag" component={Tag} />
+        <Route path="about" category="about" component={About} />
+      </Route>
     </Router>
-  </Provider>, document.getElementById('root'));
+  </Provider>, document.getElementById('root'))

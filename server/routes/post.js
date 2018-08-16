@@ -12,6 +12,9 @@ import {
   tumblrDesigns
 } from '../db'
 
+import * as database from '../db'
+
+
 export const sitemap = (req, res) => {
   res.set('Content-Type', 'text/xml')
   new Post(res, req, 'posts/sitemap', settings.title, '')
@@ -66,7 +69,14 @@ export const template = (req, res) => {
 export const index = (req, res) => {
   const title = settings.title
   const template = 'posts/index'
-  new Post(res, req, template, title, '')
+
+  res.render(
+    template,
+    {
+      env: process.env.NODE_ENV,
+      title,
+    }
+  )
 }
 
 export const about = (req, res) => {
@@ -110,10 +120,10 @@ export const tag = (req, res) => {
   new Post(res, req, template, title, '')
 }
 
-export const entry = (req, res) => {
-  const uuid = req.route.path.replace('/items/', '')
+export const entry = (req, res, path, name) => {
+  const uuid = req.route.path.replace(`/${path}/`, '')
   const template = 'posts/items/entry'
-  qiitaItems.findOne({ uuid }).exec((err, post) => {
+  database[name].findOne({ uuid }).exec((err, post) => {
     const title = `${post.title} - ${settings.title}`
     new Post(res, req, template, title, post)
   })
