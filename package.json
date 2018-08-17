@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "postinstall": "node -r babel-register bin/www",
+    "postinstall": "npm run build",
     "build": "NODE_ENV=production webpack --config webpack/webpack.app.config.js",
     "start-dev": "NODE_ENV=development PORT=1341 node -r babel-register webpack/webpack-dev-server.express.js",
     "start-dev:lint": "NODE_ENV=development PORT=1341 LINT=true node -r babel-register webpack/webpack-dev-server.express.js",
@@ -19,7 +19,7 @@
 
     "dev": "concurrently --kill-others 'npm run start-server:dev' 'npm run start-dev' 'npm run browser-sync' 'npm run postcss'",
     "dev:lint": "concurrently --kill-others 'npm run start-server:dev' 'npm run start-dev:lint' 'npm run browser-sync' 'npm run postcss'",
-    "start": "npm prune && npm i && npm run start-server:prd"
+    "start": "node -r babel-register bin/www"
   },
   "repository": {
     "type": "git"
