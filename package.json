@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "postinstall": "npm run start-server:prd",
+    "postinstall": "NODE_ENV=production node -r babel-register bin/www",
     "build": "NODE_ENV=production webpack --config webpack/webpack.app.config.js",
     "start-dev": "NODE_ENV=development PORT=1341 node -r babel-register webpack/webpack-dev-server.express.js",
     "start-dev:lint": "NODE_ENV=development PORT=1341 LINT=true node -r babel-register webpack/webpack-dev-server.express.js",
