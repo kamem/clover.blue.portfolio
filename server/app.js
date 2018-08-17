@@ -7,6 +7,7 @@ import session from 'express-session'
 import csrf from 'csurf'
 import path from 'path'
 import paginate from 'express-paginate'
+const MongoStore = require('connect-mongo')(session);
 
 import pages from './routes/pages'
 import * as post from './routes/post'
@@ -21,6 +22,8 @@ import Qiita from './api/Qiita'
 const qiita = new Qiita()
 import DropboxApi from './api/Dropbox'
 const dropbox = new DropboxApi()
+
+import {mongoose} from './models/db'
 
 const app = express();
 
@@ -46,8 +49,10 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: false,
-  secret: '929nfwamicl'
-}));
+  secret: '929nfwamicl',
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}
+));
 app.use(csrf());
 app.use((req, res, next) => {
   res.locals.csrftoken = req.csrfToken();

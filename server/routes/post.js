@@ -2,8 +2,6 @@ import settings from '../settings'
 import { ROBOT } from '../constants/robot'
 import _ from 'lodash'
 
-const db = require('../models/db')
-
 import {
   qiitaItems,
   flickrItems,

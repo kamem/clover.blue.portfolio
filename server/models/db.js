@@ -8,4 +8,6 @@ db.on('error', console.error.bind(console, 'connection error:'))
 
 console.log('connected to db')
 
+export const mongoose = mongo
+
 export default db
