@@ -1,6 +1,6 @@
 const settings = {
   title: 'clover.blue',
-  port: process.env.PORT || 3141,
+  port: process.env.PORT,
   dbName: 'cloverblue',
   dbCollectionName: 'entries'
 }
