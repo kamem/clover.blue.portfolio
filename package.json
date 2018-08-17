@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack --config webpack/webpack.app.config.js",
     "start-dev": "NODE_ENV=development PORT=1341 node -r babel-register webpack/webpack-dev-server.express.js",
     "start-dev:lint": "NODE_ENV=development PORT=1341 LINT=true node -r babel-register webpack/webpack-dev-server.express.js",
-    "start-server:prd": "NODE_ENV=production $(npm bin)/nodemon -r babel-register --watch server -e js,ejs bin/www --exec 'npm run lint:server && node'",
+    "start-server:prd": "NODE_ENV=production nodemon -r babel-register --watch server -e js,ejs bin/www --exec 'npm run lint:server && node'",
     "start-server:dev": "NODE_ENV=development nodemon -r babel-register --watch server -e js,ejs bin/www --exec 'npm run lint:server && node'",
 
     "lint:src": "eslint ./src --fix",
@@ -19,7 +19,7 @@
 
     "dev": "concurrently --kill-others 'npm run start-server:dev' 'npm run start-dev' 'npm run browser-sync' 'npm run postcss'",
     "dev:lint": "concurrently --kill-others 'npm run start-server:dev' 'npm run start-dev:lint' 'npm run browser-sync' 'npm run postcss'",
-    "start": "node -r babel-register bin/www"
+    "start": "node -r $(npm bin)/babel-register bin/www"
   },
   "repository": {
     "type": "git"
