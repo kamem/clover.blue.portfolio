@@ -14,9 +14,17 @@
 .nav {
   position: fixed;
   top: 13px;
-  left: 10px;
+  right: 10px;
   display: flex;
   z-index: 10;
+
+  @media screen and (max-width: 40.625rem) {
+    width: 115px;
+    margin: 0 auto;
+    top: auto;
+    left: 10px;
+    bottom: 10px;
+  }
 }
 
 .item {
@@ -41,5 +49,8 @@
         opacity: 1;
       }
     }
+  }
+  &:last-child {
+    margin-right: 0;
   }
 }
