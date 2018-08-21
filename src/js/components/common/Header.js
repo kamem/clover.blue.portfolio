@@ -14,10 +14,10 @@ export default class Header extends React.Component {
         <nav>
           <ul className={styles.nav}>
             <li className={styles.item}>
-              <Link to={'/'}>Home</Link>
+              <Link to={'/'}><i className="fas fa-home" />Home</Link>
             </li>
             <li className={styles.item}>
-              <Link to={'/about'}>About</Link>
+              <Link to={'/about'}><i className="fas fa-question" />About</Link>
             </li>
           </ul>
         </nav>
