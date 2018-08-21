@@ -18,9 +18,7 @@ import styles from '../../css/main.css'
 export class Tag extends React.Component {
   render() {
     const {
-      route: {
-        category
-      },
+      tagId,
       qiita,
       dropbox,
       filteredQiita,
@@ -37,9 +35,9 @@ export class Tag extends React.Component {
 
         <Tags {...{
           tags: _.chain([...qiita, ...dropbox]).map('tags').flatten().uniq().value(),
+          activeId: tagId
         }}
         />
-
 
         {
           !!filteredQiita.length && (
@@ -70,8 +68,8 @@ export class Tag extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  console.log(_.filter(state.dropbox.items, ({ tags }) => _.some(tags, (tag) => tag === props.params.tag_id)))
   return {
+    tagId: props.params.tag_id,
     qiita: state.qiita.items,
     dropbox: state.dropbox.items,
     filteredQiita: _.filter(state.qiita.items, ({ tags }) => _.some(tags, (tag) => tag === props.params.tag_id)),

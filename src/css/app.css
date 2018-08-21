@@ -14,6 +14,7 @@ body,
   margin: 0;
   padding: 0;
       font-family: "秀英丸ゴシック L", "Shuei MaruGo L", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+  font-family: 'M PLUS 1p', sans-serif;
 }
 
 i {
@@ -28,7 +29,6 @@ ul li {
   margin: 0 auto;
   max-width: calc(var(--content--max-width) + 7.5%);
 
-
   li,
   h2,
   h3,
@@ -38,7 +38,7 @@ ul li {
   pre,
   table {
     margin: 0 5%;
-    line-height: 1.9;
+    line-height: 1.6;
     font-weight: normal;
     position: relative;
     padding-bottom: 6px;
@@ -64,14 +64,15 @@ ul li {
 
   pre {
     margin-bottom: 24px;
-    letter-spacing: 0.13em;
     color: #666;
     box-sizing: border-box;
-    padding: 8px 16px;
+    padding: 8px;
     border: 1px solid #ddd;
     background-color: #fff;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
     overflow: auto;
+    font-size: 14px;
+    letter-spacing: 0;
   }
 
   h2 {
@@ -79,6 +80,7 @@ ul li {
     margin-bottom: 16px;
     font-size: 24px;
     font-weight: bold;
+    line-height: 1.4;
   }
 
   h3 {
@@ -92,29 +94,17 @@ ul li {
   }
 
   li {
-    margin-left: 9%;
+    margin-left: 10%;
     border: none;
     &:last-child {
-      margin-bottom: 56px;
+      margin-bottom: 40px;
+    }
+    pre {
+      margin: 0;
     }
 
     li {
       margin-bottom: 0 !important;
-    }
-  }
-
-  a {
-    padding: 6px 0;
-    display: inline-block;
-    text-decoration: underline;
-    font-size: 15px;
-    letter-spacing: 0.13em;
-    color: #666;
-    &:hover {
-      opacity: 0.6;
-      .tags {
-        opacity: 1;
-      }
     }
   }
 
@@ -128,14 +118,29 @@ ul li {
       background-color: var(--main-color);
       display: block;
       position: absolute;
-      top: 1em;
+      top: 0.6em;
       left: -24px;
       margin: auto 0;
     }
   }
 
+  a {
+    display: inline-block;
+    text-decoration: underline;
+    font-size: 15px;
+    letter-spacing: 0.13em;
+    color: #666;
+    word-break: break-all;
+    &:hover {
+      opacity: 0.6;
+      .tags {
+        opacity: 1;
+      }
+    }
+  }
+
   table {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 25px;
     border-collapse: collapse;
     overflow: auto;
@@ -143,7 +148,7 @@ ul li {
 
     th,
     td {
-      padding: 4px 16px;
+      padding: 8px 8px;
       border: 1px solid #ddd;
       background-color: #fff;
     }
@@ -162,6 +167,7 @@ ul li {
   }
 
   blockquote {
+    margin: 0 1%;
     padding-top: 16px;
     margin-bottom: 24px;
     background-color: rgba(255, 255, 255, 0.5);

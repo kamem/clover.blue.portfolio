@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import _ from 'lodash'
 import moment from 'moment'
 
 // Components
@@ -54,7 +55,9 @@ export class Tags extends React.Component {
 export class Content extends React.Component {
   render() {
     return (
-      <div className="content" dangerouslySetInnerHTML={{ __html: this.props.children }} />
+      _.isString(this.props.children) ?
+      <div className="content" dangerouslySetInnerHTML={{ __html: this.props.children }} /> :
+      <div className="content">{this.props.children}</div>
     )
   }
 }

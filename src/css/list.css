@@ -32,7 +32,6 @@
   position: relative;
   padding-left: 30px;
   margin: 1px 0;
-  position: relative;
   &:before {
     content: '';
     width: 7px;
@@ -51,11 +50,12 @@
     }
   }
   a {
+    margin-right: 3%;
     padding: 6px 0;
     display: inline-block;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     font-size: 15px;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.05em;
     text-decoration: none;
     color: #555;
     &:hover {
