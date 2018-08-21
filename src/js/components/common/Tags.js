@@ -1,5 +1,4 @@
 import React from 'react'
-import classNames from 'classNames'
 import { Link } from 'react-router'
 
 // Css
@@ -20,7 +19,7 @@ export default class Tags extends React.Component {
 export class Tag extends React.Component {
   render() {
     return (
-      <li className={classNames(styles.tag, {[styles.active]: this.props.active})}><Link to={`/tags/${this.props.children}`}>{this.props.children}</Link></li>
+      <li className={([styles.tag, this.props.active ? styles.active : '']).join(' ')}><Link to={`/tags/${this.props.children}`}>{this.props.children}</Link></li>
     )
   }
 }
