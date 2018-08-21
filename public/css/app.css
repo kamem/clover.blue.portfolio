@@ -77,6 +77,22 @@ ul li {
   margin-bottom: 16px;
 }
 
+.content h3:before {
+  content: '[';
+}
+
+.content h3:after {
+  content: ' ]';
+}
+
+.content h4 {
+  margin-bottom: 8px;
+}
+
+.content h4:before {
+  content: '↘';
+}
+
 .content p {
   margin-bottom: 32px;
   font-size: 15px;
@@ -174,4 +190,10 @@ ul li {
 
 .content blockquote > * {
   color: #777;
+}
+
+.content hr {
+  border: none;
+  border-bottom: 5px solid rgba(0,0,0,0.05);
+  margin-bottom: 40px;
 }

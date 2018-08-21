@@ -91,6 +91,19 @@ ul li {
   h3 {
     margin-top: 40px;
     margin-bottom: 16px;
+    &:before {
+      content: '[';
+    }
+    &:after {
+      content: ' ]';
+    }
+  }
+
+  h4 {
+    margin-bottom: 8px;
+    &:before {
+      content: '↘';
+    }
   }
 
   p {
@@ -181,5 +194,11 @@ ul li {
     > * {
       color: #777;
     }
+  }
+
+  hr {
+    border: none;
+    border-bottom: 5px solid rgba(0,0,0,0.05);
+    margin-bottom: 40px;
   }
 }
