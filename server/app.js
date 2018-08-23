@@ -75,6 +75,7 @@ app.get('/update/qiita', (req, res) => {
     return res.status(500).send('Something broke!')
   })
 })
+
 app.get('/update/dropbox', (req, res) => {
   if(!req.query.api_key) {
     return res.status(400).send('パラメーターが間違ってるよ')

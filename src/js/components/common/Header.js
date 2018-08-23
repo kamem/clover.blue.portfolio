@@ -11,6 +11,8 @@ export default class Header extends React.Component {
   render() {
     return (
       <header {...{ className: styles.header }}>
+        <h1 className={styles.title}><Link to="/">clover.blue</Link></h1>
+
         <nav>
           <ul className={styles.nav}>
             <li className={styles.item}>

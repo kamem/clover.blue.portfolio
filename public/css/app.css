@@ -9,7 +9,6 @@ html, body, #root {
 * {
   margin: 0;
   padding: 0;
-      font-family: "秀英丸ゴシック L", "Shuei MaruGo L", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
   font-family: 'M PLUS 1p', sans-serif;
 }
 
@@ -38,7 +37,7 @@ ul li {
   color: #555;
 }
 
-.content li li, .content li h2, .content li h3, .content li h4, .content li h5, .content li p, .content li table, .content h2 li, .content h2 h2, .content h2 h3, .content h2 h4, .content h2 h5, .content h2 p, .content h2 table, .content h3 li, .content h3 h2, .content h3 h3, .content h3 h4, .content h3 h5, .content h3 p, .content h3 table, .content h4 li, .content h4 h2, .content h4 h3, .content h4 h4, .content h4 h5, .content h4 p, .content h4 table, .content h5 li, .content h5 h2, .content h5 h3, .content h5 h4, .content h5 h5, .content h5 p, .content h5 table, .content p li, .content p h2, .content p h3, .content p h4, .content p h5, .content p p, .content p table, .content pre li, .content pre h2, .content pre h3, .content pre h4, .content pre h5, .content pre p, .content pre table, .content table li, .content table h2, .content table h3, .content table h4, .content table h5, .content table p, .content table table {
+.content li h2, .content li h3, .content li h4, .content li h5, .content li p, .content li table, .content h2 h2, .content h2 h3, .content h2 h4, .content h2 h5, .content h2 p, .content h2 table, .content h3 h2, .content h3 h3, .content h3 h4, .content h3 h5, .content h3 p, .content h3 table, .content h4 h2, .content h4 h3, .content h4 h4, .content h4 h5, .content h4 p, .content h4 table, .content h5 h2, .content h5 h3, .content h5 h4, .content h5 h5, .content h5 p, .content h5 table, .content p h2, .content p h3, .content p h4, .content p h5, .content p p, .content p table, .content pre h2, .content pre h3, .content pre h4, .content pre h5, .content pre p, .content pre table, .content table h2, .content table h3, .content table h4, .content table h5, .content table p, .content table table {
   margin: 0;
 }
 
@@ -54,8 +53,8 @@ ul li {
   margin-bottom: 24px;
   color: #666;
   box-sizing: border-box;
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 8px !important;
+  border: 1px solid #ddd !important;
   background-color: #fff;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
   overflow: auto;
@@ -72,9 +71,17 @@ ul li {
   word-break: break-all;
 }
 
+.content h2:first-child {
+  margin-top: 0;
+}
+
 .content h3 {
   margin-top: 40px;
   margin-bottom: 16px;
+}
+
+.content h3:first-child {
+  margin-top: 0;
 }
 
 .content h3:before {

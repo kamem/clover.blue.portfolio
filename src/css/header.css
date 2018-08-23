@@ -11,6 +11,24 @@
   }
 }
 
+.title {
+  position: relative;
+  z-index: 11;
+  a {
+    display: block;
+    padding: 4px 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #fff;
+    border-radius: 0 0 4px 0;
+    background-color: var(--main-color);
+    text-decoration: none;
+  }
+}
+
 .nav {
   position: fixed;
   top: 13px;

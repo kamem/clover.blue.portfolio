@@ -46,9 +46,9 @@ export class App extends React.Component {
       <div {...{ className: styles.containers }}>
         <Header />
 
-        {React.cloneElement(this.props.children, {
-          scrollPosition
-        })}
+        <main>
+          {React.cloneElement(this.props.children, {})}
+        </main>
       </div>
     )
   }

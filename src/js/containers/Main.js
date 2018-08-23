@@ -36,12 +36,6 @@ export class Main extends React.Component {
 
     return (
       <div>
-        <Header />
-
-        <div {...{ className: styles.main }}>
-          <h1 className={styles.title}>clover.blue</h1>
-        </div>
-
         <Tags {...{
           tags: _.chain([...qiita, ...dropbox]).map('tags').flatten().uniq().value(),
         }}
@@ -57,15 +51,11 @@ export class Main extends React.Component {
 
         <div {...{ className: classNames(styles.item, styles.dropbox) }}>
           <List {...{
-            items: dropbox,
+            items: _.slice(dropbox, 0, 8),
             path: 'doc'
           }}
           />
         </div>
-
-        <About
-          ref="about"
-        />
       </div>
     )
   }

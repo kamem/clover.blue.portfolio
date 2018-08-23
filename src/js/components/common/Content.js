@@ -53,11 +53,26 @@ export class Tags extends React.Component {
 }
 
 export class Content extends React.Component {
+  componentDidUpdate() {
+    this.prettyPrint()
+  }
+
+  componentDidMount() {
+    this.prettyPrint()
+  }
+
+  prettyPrint() {
+    this.refs.content.querySelectorAll('pre').forEach((pre) => {
+      pre.setAttribute('class', 'prettyprint');
+    })
+    PR.prettyPrint();
+  }
+
   render() {
     return (
       _.isString(this.props.children) ?
-      <div className="content" dangerouslySetInnerHTML={{ __html: this.props.children }} /> :
-      <div className="content">{this.props.children}</div>
+      <div className="content" ref="content" dangerouslySetInnerHTML={{ __html: this.props.children }} /> :
+      <div className="content" ref="content">{this.props.children}</div>
     )
   }
 }

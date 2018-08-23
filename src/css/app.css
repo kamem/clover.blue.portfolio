@@ -13,7 +13,6 @@ body,
 * {
   margin: 0;
   padding: 0;
-      font-family: "秀英丸ゴシック L", "Shuei MaruGo L", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
   font-family: 'M PLUS 1p', sans-serif;
 }
 
@@ -47,7 +46,6 @@ ul li {
     text-decoration: none;
     color: #555;
 
-    li,
     h2,
     h3,
     h4,
@@ -70,8 +68,8 @@ ul li {
     margin-bottom: 24px;
     color: #666;
     box-sizing: border-box;
-    padding: 8px;
-    border: 1px solid #ddd;
+    padding: 8px !important;
+    border: 1px solid #ddd !important;
     background-color: #fff;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
     overflow: auto;
@@ -86,11 +84,19 @@ ul li {
     font-weight: bold;
     line-height: 1.4;
     word-break: break-all;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   h3 {
     margin-top: 40px;
     margin-bottom: 16px;
+
+    &:first-child {
+      margin-top: 0;
+    }
     &:before {
       content: '[';
     }
