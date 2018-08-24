@@ -18,7 +18,7 @@ const store = configureStore()
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={App} onChange={() => {window.scrollTo(0, 0)}}>
         <IndexRoute component={Main} category="main" />
         <Route path="items/:item_id" category="item" component={Qiita} />
         <Route path="doc/:item_id" category="doc" component={Dropbox} />
