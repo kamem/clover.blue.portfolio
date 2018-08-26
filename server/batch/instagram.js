@@ -1,7 +1,6 @@
-import Qiita from '../api/Qiita'
+import InstagramApi from '../api/Instagram'
 
-const api = new Qiita()
-api.API_KEY = '20e2a912d33f6f9779faa71522d5baacef437a27'
+const api = new InstagramApi();
 
 api.saveEntries().then(() => {
   console.log('complated!!')

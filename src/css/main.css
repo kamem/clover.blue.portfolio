@@ -34,9 +34,14 @@
   }
 }
 .dropbox {
-  margin-bottom: 0;
   &:before {
     content: 'Paper';
+  }
+}
+.instagram {
+  margin-bottom: 0;
+  &:before {
+    content: 'Instagram';
   }
 }
 

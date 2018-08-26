@@ -6,8 +6,6 @@ import {
   qiitaItems,
   flickrItems,
   pixivItems,
-  tumblrItems,
-  tumblrDesigns
 } from '../db'
 
 import * as database from '../db'
@@ -28,7 +26,6 @@ export const feed = (req, res) => {
     tumblr(),
     designs()
   ]).then(([qiita, flickr, pixiv, tumblr, tumblrDesigns]) => {
-    console.log(tumblrDesigns)
     res.render(
       'posts/feed',
       {
@@ -48,16 +45,6 @@ export const feedChild = (req, res) => {
   const title = `posts/${req.path.slice(1)}`
   const template = settings.title
   new Post(res, req, title, template, '')
-}
-
-export const feedDesign = (req, res) => {
-  res.set('Content-Type', 'text/xml')
-  tumblrDesigns.find({}).sort('-updated').exec((err, tumblrDesignPosts) => {
-    res.render(`posts/${req.path.slice(1)}`, {
-      title: settings.title,
-      tumblrDesigns: tumblrDesignPosts
-    })
-  })
 }
 
 export const template = (req, res) => {
@@ -118,20 +105,11 @@ export const tag = (req, res) => {
   new Post(res, req, template, title, '')
 }
 
-export const entry = (req, res, path, name) => {
+export const entry = (req, res, path, name, title) => {
   const uuid = req.route.path.replace(`/${path}/`, '')
   const template = 'posts/items/entry'
   database[name].findOne({ uuid }).exec((err, post) => {
-    const title = `${post.title} - ${settings.title}`
-    new Post(res, req, template, title, post)
-  })
-}
-
-export const diaryEntry = (req, res) => {
-  const uuid = req.route.path.replace('/post/', '')
-  const template = 'posts/post/entry'
-  tumblrItems.findOne({ uuid }).exec((err, post) => {
-    const title = `${post.title} - ${settings.title}`
+    const title = `${title || post.title} - ${settings.title}`
     new Post(res, req, template, title, post)
   })
 }
@@ -164,23 +142,9 @@ const pixiv = () => new Promise((resolve, reject) => {
   })
 })
 const tumblr = () => new Promise((resolve, reject) => {
-  tumblrItems.find({}).sort('-updated').exec((err, tumblrPosts) => {
-    if (err) {
-      reject(err)
-      return
-    }
-    resolve(tumblrPosts)
-  })
 })
 
 const designs = () => new Promise((resolve, reject) => {
-  tumblrDesigns.find({}).sort('-updated').exec((err, tumblrDesignPosts) => {
-    if (err) {
-      reject(err)
-      return
-    }
-    resolve(tumblrDesignPosts)
-  })
 })
 
 const Post = (res, req, template, title, item) => {
@@ -190,8 +154,6 @@ const Post = (res, req, template, title, item) => {
   Promise.all([
     qiita(),
     flickr(),
-    pixiv(),
-    tumblr()
   ]).then(([qiita, flickr, pixiv, tumblr]) => {
     res.render(
       robotDirectory + template,
@@ -200,9 +162,6 @@ const Post = (res, req, template, title, item) => {
         title,
         qiita,
         flickr,
-        pixiv,
-        tumblr,
-        item
       }
     )
   })

@@ -60,31 +60,28 @@ export const pixivItems = mongo.model(
   })
 );
 
-// Tumblr
-export const tumblrItems = mongo.model(
-  'tumblr_items',
-  mongo.Schema({
-    updated: {type: Number, min: 0, default: 0},
-    uuid: String,
-    title: String,
-    body: String,
-    tags: Array,
-    type: String
-  })
+// Instagram
+const instagram = new mongo.Schema({
+  created: {type: Number, min: 0, default: 0},
+  uuid: String,
+  body: String,
+  thumbnail: String,
+  thumbnailWidth: {type: Number, min: 0, default: 0},
+  thumbnailHeight: {type: Number, min: 0, default: 0},
+  img: String,
+  imgWidth: {type: Number, min: 0, default: 0},
+  imgHeight: {type: Number, min: 0, default: 0},
+  tags: Array
+})
+
+instagram.plugin(mongoosePaginate)
+export const instagramItems = mongo.model(
+  'instagram_items',
+  instagram
 );
-export const tumblrTags = mongo.model(
-  'tumblr_tags',
+export const instagramTags = mongo.model(
+  'instagram_tags',
   tags
-);
-export const tumblrDesigns = mongo.model(
-  'tumblr_designs',
-  mongo.Schema({
-    updated: {type: Number, min: 0, default: 0},
-    uuid: String,
-    url: String,
-    title: String,
-    tags: Array
-  })
 );
 
 // Dropbox

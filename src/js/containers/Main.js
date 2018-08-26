@@ -8,10 +8,9 @@ import { connect } from 'react-redux'
 import * as env from '../env'
 
 // Components
-import Header from '../components/common/Header'
 import List from '../components/common/List'
+import Photos from '../components/common/Photos'
 import Tags from '../components/common/Tags'
-import About from '../containers/About'
 
 // Cass
 import styles from '../../css/main.css'
@@ -31,13 +30,14 @@ export class Main extends React.Component {
         category
       },
       qiita,
-      dropbox
+      dropbox,
+      instagram
     } = this.props
 
     return (
       <div>
         <Tags {...{
-          tags: _.chain([...qiita, ...dropbox]).map('tags').flatten().uniq().value(),
+          tags: _.chain([...qiita, ...dropbox, ...instagram]).map('tags').flatten().uniq().value(),
         }}
         />
 
@@ -56,6 +56,14 @@ export class Main extends React.Component {
           }}
           />
         </div>
+
+        <div {...{ className: classNames(styles.item, styles.instagram) }}>
+          <Photos {...{
+            items: _.slice(instagram, 0, 6),
+            path: 'p'
+          }}
+          />
+        </div>
       </div>
     )
   }
@@ -66,6 +74,7 @@ function mapStateToProps(state) {
     ...state.test,
     qiita: state.qiita.items,
     dropbox: state.dropbox.items,
+    instagram: state.instagram.items,
   }
 }
 

@@ -1,0 +1,26 @@
+@import "settings";
+
+.photos {
+  margin: 0 auto;
+  max-width: var(--content--max-width);
+  text-align: center;
+  position: relative;
+}
+
+.item {
+  margin: 8px 8px 0 8px;
+  width: 180px;
+  display: inline-block;
+  img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+  }
+
+  a {
+    display: block;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

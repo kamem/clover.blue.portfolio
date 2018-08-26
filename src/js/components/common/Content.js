@@ -33,7 +33,7 @@ export class Data extends React.Component {
     return item ? (
       <dl className={styles.data}>
         <dt>Data</dt>
-        <dd>{moment.unix(item.updated).format('YYYY/MM/DD')}</dd>
+        <dd>{moment.unix(item.updated || item.created).format('YYYY/MM/DD')}</dd>
         <dt>Tag</dt>
         <dd><Tags tags={item.tags} /></dd>
       </dl>

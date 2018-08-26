@@ -11,6 +11,7 @@ import * as env from '../env'
 import Header from '../components/common/Header'
 import List from '../components/common/List'
 import Tags from '../components/common/Tags'
+import Photos from '../components/common/Photos'
 
 // Cass
 import styles from '../../css/main.css'
@@ -21,14 +22,16 @@ export class Tag extends React.Component {
       tagId,
       qiita,
       dropbox,
+      instagram,
       filteredQiita,
-      filteredDropbox
+      filteredDropbox,
+      filteredInstagram
     } = this.props
 
     return (
       <div>
         <Tags {...{
-          tags: _.chain([...qiita, ...dropbox]).map('tags').flatten().uniq().value(),
+          tags: _.chain([...qiita, ...dropbox, ...instagram]).map('tags').flatten().uniq().value(),
           activeId: tagId
         }}
         />
@@ -56,18 +59,33 @@ export class Tag extends React.Component {
             </div>
           )
         }
+
+        {
+          !!filteredInstagram.length && (
+            <div {...{ className: classNames(styles.item, styles.instagram) }}>
+              <Photos {...{
+                items: filteredInstagram,
+                path: 'p'
+              }}
+              />
+            </div>
+          )
+        }
       </div>
     )
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps({ qiita, dropbox, instagram}, props) {
+  const tagId = props.params.tag_id
   return {
     tagId: props.params.tag_id,
-    qiita: state.qiita.items,
-    dropbox: state.dropbox.items,
-    filteredQiita: _.filter(state.qiita.items, ({ tags }) => _.some(tags, (tag) => tag === props.params.tag_id)),
-    filteredDropbox: _.filter(state.dropbox.items, ({ tags }) => _.some(tags, (tag) => tag === props.params.tag_id)),
+    qiita: qiita.items,
+    dropbox: dropbox.items,
+    instagram: instagram.items,
+    filteredQiita: _.filter(qiita.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
+    filteredDropbox: _.filter(dropbox.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
+    filteredInstagram: _.filter(instagram.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
   }
 }
 

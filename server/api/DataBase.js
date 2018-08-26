@@ -210,7 +210,6 @@ export default class DataBase {
 
 
   saveEntriesEvnets(items) {
-    // QiitaのApiを取得してから、bodyの中身をDBに保存するフォーマットに変換してる
     const saveEvents = _.map(items, (item) =>
       this.saveItem(item)
     )

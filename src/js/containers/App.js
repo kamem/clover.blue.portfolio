@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 // Actions
 import * as QiitaActions from '../actions/QiitaActions'
 import * as DropboxActions from '../actions/DropboxActions'
+import * as InstagramActions from '../actions/InstagramActions'
 
 // Constants
 import { MARKS } from '../constants/cards'
@@ -29,6 +30,7 @@ export class App extends React.Component {
 
     this.props.qiitaActions.featchItesm()
     this.props.dropboxActions.featchItesm()
+    this.props.instagramActions.featchItesm()
   }
 
   setWindowInfo() {
@@ -78,7 +80,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     qiitaActions: bindActionCreators(QiitaActions, dispatch),
-    dropboxActions: bindActionCreators(DropboxActions, dispatch)
+    dropboxActions: bindActionCreators(DropboxActions, dispatch),
+    instagramActions: bindActionCreators(InstagramActions, dispatch),
   }
 }
 

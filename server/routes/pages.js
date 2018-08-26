@@ -48,6 +48,11 @@ pages = pages.concat([
     method: 'get',
     url: '/dropbox/tags',
     complete: getDb.getDropboxPaperTags
+  },
+  {
+    method: 'get',
+    url: '/instagram/items',
+    complete: getDb.getInstagramItems
   }
 ])
 

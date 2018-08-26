@@ -16,12 +16,16 @@ import {
   qiitaTags,
   dropbox_paperItems,
   dropbox_paperTags,
+  instagramItems,
+  instagramTags,
 } from './db'
 
 import Qiita from './api/Qiita'
 const qiita = new Qiita()
 import DropboxApi from './api/Dropbox'
 const dropbox = new DropboxApi()
+import InstagramApi from './api/Instagram'
+const instagram = new InstagramApi()
 
 import {mongoose} from './models/db'
 
@@ -91,6 +95,22 @@ app.get('/update/dropbox', (req, res) => {
   })
 })
 
+// routing
+app.get('/update/instagram', (req, res) => {
+  if(!req.query.api_key) {
+    return res.status(400).send('パラメーターが間違ってるよ')
+  }
+
+  instagram.API_KEY = req.query.api_key
+  instagram.saveEntries().then((values) => {
+    console.log('complated!!')
+    res.json(values)
+  }).catch((err) => {
+    console.log(err)
+    return res.status(500).send('Something broke!')
+  })
+})
+
 pages.forEach((page) => {
   app[page.method](page.url, page.complete)
 })
@@ -103,6 +123,12 @@ qiitaItems.find({}, (err, posts) => {
 dropbox_paperItems.find({}, (err, posts) => {
   posts.forEach(({ uuid }) => {
     app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, 'doc', 'dropbox_paperItems'))
+  })
+})
+
+instagramItems.find({}, (err, posts) => {
+  posts.forEach(({ uuid }) => {
+    app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, 'p', 'instagramItems', 'Instagram'))
   })
 })
 
@@ -123,14 +149,16 @@ dropbox_paperTags.find({}, (err, posts) => {
     app.get(`/tags/${encodeURI(name)}`, post.index);
   })
 })
+instagramTags.find({}, (err, posts) => {
+  posts.forEach(({ name }) => {
+    app.get(`/tags/${encodeURI(name)}`, post.index);
+  })
+})
 
 // feed
 app.get('/feed', post.feed);
-app.get('/feed/illust', post.feedChild);
 app.get('/feed/photo', post.feedChild);
 app.get('/feed/weblog', post.feedChild);
-app.get('/feed/diary', post.feedChild);
-app.get('/feed/design', post.feedDesign);
 
 // sitemap
 app.get('/sitemap.xml', post.sitemap);

@@ -13,6 +13,9 @@ export function getDropboxPaperItems(req, res, next) {
 export function getDropboxPaperTags(req, res, next) {
   getItems('dropbox_paperTags', (items) => _.map(items, 'name'), req, res, next)
 }
+export function getInstagramItems(req, res, next) {
+  getItems('instagramItems', '', req, res, next)
+}
 
 export function getItems(dbName, map, {query: {page, limit, updated}}, res) {
 
