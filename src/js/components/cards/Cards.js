@@ -42,31 +42,33 @@ export default class Cards extends React.Component {
     const { cards, animationType, cardAnimations, className } = this.props
 
     return (
-      <ul className={classNames(
-        {
-          [animation[animationType]]: animationType,
-          [animation[className]]: className,
-        },
-        [animation.cards]
-      )}
-      >
-        {
-          _.map(cards, ({ mark, name, num }, i) => (
-            <Card
-              ref={`card_${name}_${num}`}
-              {...{
-                style: cardAnimations && cardAnimations[i],
-                mark,
-                name,
-                num,
-                key: `${name}${num}`,
-                selected: _.some(this.state.selectedCards, { name, num }),
-                onClick: ::this.changeSelectedCards
-              }}
-            />
-          ))
-         }
-      </ul>
+      <div className={animation.wrap}>
+        <ul className={classNames(
+          {
+            [animation[animationType]]: animationType,
+            [animation[className]]: className,
+          },
+          [animation.cards]
+        )}
+        >
+          {
+            _.map(cards, ({ mark, name, num }, i) => (
+              <Card
+                ref={`card_${name}_${num}`}
+                {...{
+                  style: cardAnimations && cardAnimations[i],
+                  mark,
+                  name,
+                  num,
+                  key: `${name}${num}`,
+                  selected: _.some(this.state.selectedCards, { name, num }),
+                  onClick: ::this.changeSelectedCards
+                }}
+              />
+            ))
+           }
+        </ul>
+      </div>
     )
   }
 }
