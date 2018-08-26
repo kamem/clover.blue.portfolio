@@ -59,7 +59,7 @@ export class Main extends React.Component {
 
         <div {...{ className: classNames(styles.item, styles.instagram) }}>
           <Photos {...{
-            items: _.slice(instagram, 0, 6),
+            items: _.slice(instagram, 0, 8),
             path: 'p'
           }}
           />
