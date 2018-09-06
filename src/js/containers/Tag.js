@@ -84,7 +84,14 @@ function mapStateToProps({ qiita, dropbox, instagram}, props) {
     dropbox: dropbox.items,
     instagram: instagram.items,
     filteredQiita: _.filter(qiita.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
-    filteredDropbox: _.filter(dropbox.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
+    filteredDropbox: _.chain(dropbox.items)
+    .filter(({ tags }) => _.some(tags, (tag) => tag === tagId))
+    .sortBy((item) => {
+      if(tagId === 'Javascript講座') {
+        return parseInt(item.title.match(/[+-]?\d+/))
+      }
+    })
+    .value(),
     filteredInstagram: _.filter(instagram.items, ({ tags }) => _.some(tags, (tag) => tag === tagId)),
   }
 }
