@@ -45,9 +45,7 @@ export default class QiitaApi extends DataBase {
         }
         const items = _.map(data, ({
             link,
-            caption: {
-              text
-            },
+            caption,
             created_time: created,
             images: {
               low_resolution: {
@@ -65,7 +63,7 @@ export default class QiitaApi extends DataBase {
           }) => ({
             uuid: link.split('/')[4],
             created: moment(parseInt(created, 10) * 1000).unix(),
-            body: text,
+            body: caption && caption.text,
             thumbnail,
             thumbnailWidth,
             thumbnailHeight,
