@@ -11,6 +11,7 @@ const entry = new mongo.Schema({
   created: {type: Number, min: 0, default: 0},
   updated: {type: Number, min: 0, default: 0},
   uuid: String,
+  user: String,
   title: String,
   body: String,
   tags: Array

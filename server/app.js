@@ -66,11 +66,12 @@ app.use(logger('dev'));
 
 // routing
 app.get('/update/qiita', (req, res) => {
-  if(!req.query.api_key) {
+  if(!req.query.api_key || !req.query.user_name) {
     return res.status(400).send('パラメーターが間違ってるよ')
   }
 
   qiita.API_KEY = req.query.api_key
+  qiita.USER_NAME = req.query.user_name
   qiita.saveEntries().then((values) => {
     console.log('complated!!')
     res.json(values)

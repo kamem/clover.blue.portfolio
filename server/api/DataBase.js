@@ -6,10 +6,10 @@ import * as cloverBlueDb from '../db'
 export default class DataBase {
 
   // uuidから登録されている1件データをとってくる
-  getItem(uuid) {
+  getItem(uuid, user) {
     const itemsName = `${this.name}Items`
     return new Promise((resolve, reject) => {
-      cloverBlueDb[itemsName].findOne({ uuid },
+      cloverBlueDb[itemsName].findOne({ uuid, user },
         (err, post) => {
           if(err) {
             reject(err)
@@ -21,9 +21,9 @@ export default class DataBase {
   }
 
   // uuidをもとに更新する
-  updateItem(uuid, item) {
+  updateItem(uuid, item, user) {
     return new Promise((resolve, reject) => {
-      this.getItem(uuid).then((post) => {
+      this.getItem(uuid, user).then((post) => {
         if(
           post.updated !== item.updated ||
           post.body !== item.body ||
@@ -72,7 +72,7 @@ export default class DataBase {
 
   // itemからuuidで検索して1つでもあった場合はupdate、なかった場合はcreate
   saveItem(item) {
-    const { uuid } = item
+    const { uuid, user } = item
     const itemsName = `${this.name}Items`
 
     return new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ export default class DataBase {
           reject(err)
         }
         if(count) {
-          this.updateItem(uuid, item).then((updateItem) =>
+          this.updateItem(uuid, item, user).then((updateItem) =>
             resolve(updateItem && Object.assign({}, item, { isUpdated: true }))
           ).catch((itemErr) => {
             console.error(itemErr)
