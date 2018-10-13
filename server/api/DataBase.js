@@ -6,10 +6,10 @@ import * as cloverBlueDb from '../db'
 export default class DataBase {
 
   // uuidから登録されている1件データをとってくる
-  getItem(uuid, user) {
+  getItem(uuid) {
     const itemsName = `${this.name}Items`
     return new Promise((resolve, reject) => {
-      cloverBlueDb[itemsName].findOne({ uuid, user },
+      cloverBlueDb[itemsName].findOne({ uuid },
         (err, post) => {
           if(err) {
             reject(err)
@@ -21,9 +21,9 @@ export default class DataBase {
   }
 
   // uuidをもとに更新する
-  updateItem(uuid, item, user) {
+  updateItem(uuid, item) {
     return new Promise((resolve, reject) => {
-      this.getItem(uuid, user).then((post) => {
+      this.getItem(uuid).then((post) => {
         if(
           post.updated !== item.updated ||
           post.body !== item.body ||
@@ -72,7 +72,7 @@ export default class DataBase {
 
   // itemからuuidで検索して1つでもあった場合はupdate、なかった場合はcreate
   saveItem(item) {
-    const { uuid, user } = item
+    const { uuid } = item
     const itemsName = `${this.name}Items`
 
     return new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ export default class DataBase {
           reject(err)
         }
         if(count) {
-          this.updateItem(uuid, item, user).then((updateItem) =>
+          this.updateItem(uuid, item).then((updateItem) =>
             resolve(updateItem && Object.assign({}, item, { isUpdated: true }))
           ).catch((itemErr) => {
             console.error(itemErr)
@@ -252,7 +252,7 @@ export default class DataBase {
 
   removeDBItems(ItemsName, items, target, removeEvent) {
     return new Promise((resolve, reject) => {
-      cloverBlueDb[ItemsName].find({}, (err, post) => {
+      cloverBlueDb[ItemsName].find({ user: this.USER_NAME }, (err, post) => {
         if(err) {
           console.error(err)
           reject(err)
