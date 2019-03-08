@@ -252,7 +252,7 @@ export default class DataBase {
 
   removeDBItems(ItemsName, items, target, removeEvent) {
     return new Promise((resolve, reject) => {
-      cloverBlueDb[ItemsName].find({}, (err, post) => {
+      cloverBlueDb[ItemsName].find({ user: this.USER_NAME }, (err, post) => {
         if(err) {
           console.error(err)
           reject(err)

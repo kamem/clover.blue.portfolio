@@ -14,7 +14,7 @@ export default class QiitaApi extends DataBase {
 
     this.API_URI = 'http://qiita.com/api/v2/'
     this.API_KEY = ''
-    this.USER_NAME = 'kamem'
+    this.USER_NAME = ''
   }
 
   fetchItems() {
@@ -47,6 +47,7 @@ export default class QiitaApi extends DataBase {
         }
         const items = _.map(responseBody, ({
             id: uuid,
+            user: { id: user },
             created_at: created,
             updated_at: updated,
             title,
@@ -54,6 +55,7 @@ export default class QiitaApi extends DataBase {
             tags
           }) => ({
             uuid,
+            user,
             created: moment(created).unix(),
             updated: moment(updated).unix(),
             title,
