@@ -3,15 +3,13 @@ import _ from 'lodash'
 import moment from 'moment'
 import Promise from 'bluebird'
 import marked from 'marked'
-import DataBase from './DataBase'
+import * as Firestore from './Firestere'
 import { generateResult } from './utils/generateResult'
 
 const folderName = 'clover.blue'
 
-export default class DropboxApi extends DataBase {
+export default class DropboxApi {
   constructor() {
-    super()
-
     this.name = 'dropbox_paper'
 
     this.API_URI = 'https://api.dropboxapi.com/2/'
@@ -185,18 +183,11 @@ export default class DropboxApi extends DataBase {
           })
         )
 
-        const tags = _.chain(items)
-        .map('tags')
-        .flatten()
-        .compact()
-        .uniq()
-        .value()
-
         return Promise.all([
-          this.saveEntriesEvnets(items),
-          this.saveTagsEvents(tags),
-          this.removeItems(items),
-          this.removeTags(tags)
+          Firestore.saveEntriesEvents(items, this.name),
+          [],
+          Firestore.removeItems(items, this.name),
+          [],
         ]).then((values) => resolve(generateResult(values)))
       }).catch((err) => {
         console.log(err)

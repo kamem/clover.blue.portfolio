@@ -4,11 +4,17 @@ const path = require('path')
 
 const port = process.env.PORT || 3001
 
-const webpackConfig = {
-  entry: [
+const entry = [
+  './src/js/app.js'
+]
+
+if(process.env.NODE_ENV === 'development') {
+  entry.push(
     `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
-    './src/js/app.js'
-  ],
+  )
+}
+const webpackConfig = {
+  entry,
   output: {
     path: path.join(__dirname, '../public/js/'),
     publicPath: `http://localhost:${port}/js/`,

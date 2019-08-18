@@ -7,18 +7,10 @@ import session from 'express-session'
 import csrf from 'csurf'
 import path from 'path'
 import paginate from 'express-paginate'
-const MongoStore = require('connect-mongo')(session);
+import { getItems } from './api/Firestere'
 
 import pages from './routes/pages'
 import * as post from './routes/post'
-import {
-  qiitaItems,
-  qiitaTags,
-  dropbox_paperItems,
-  dropbox_paperTags,
-  instagramItems,
-  instagramTags,
-} from './db'
 
 import Qiita from './api/Qiita'
 const qiita = new Qiita()
@@ -26,8 +18,6 @@ import DropboxApi from './api/Dropbox'
 const dropbox = new DropboxApi()
 import InstagramApi from './api/Instagram'
 const instagram = new InstagramApi()
-
-import {mongoose} from './models/db'
 
 const app = express();
 
@@ -54,7 +44,6 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   secret: '929nfwamicl',
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }
 ));
 app.use(csrf());
@@ -116,20 +105,19 @@ pages.forEach((page) => {
   app[page.method](page.url, page.complete)
 })
 
-qiitaItems.find({}, (err, posts) => {
-  posts.forEach(({ uuid }) => {
-    app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, 'items', 'qiitaItems'));
+getItems('qiita').then((data) => {
+  data.forEach(({ uuid, title }) => {
+    app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
-dropbox_paperItems.find({}, (err, posts) => {
-  posts.forEach(({ uuid }) => {
-    app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, 'doc', 'dropbox_paperItems'))
+getItems('dropbox').then((data) => {
+  data.forEach(({ uuid, title }) => {
+    app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
-
-instagramItems.find({}, (err, posts) => {
-  posts.forEach(({ uuid }) => {
-    app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, 'p', 'instagramItems', 'Instagram'))
+getItems('instagram').then((data) => {
+  data.forEach(({ uuid, title }) => {
+    app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
 
@@ -139,22 +127,6 @@ app.get('/illust', post.illust);
 app.get('/diary', post.diary);
 app.get('/design', post.design);
 
-
-qiitaTags.find({}, (err, posts) => {
-  posts.forEach(({ name }) => {
-    app.get(`/tags/${encodeURI(name)}`, post.index);
-  })
-})
-dropbox_paperTags.find({}, (err, posts) => {
-  posts.forEach(({ name }) => {
-    app.get(`/tags/${encodeURI(name)}`, post.index);
-  })
-})
-instagramTags.find({}, (err, posts) => {
-  posts.forEach(({ name }) => {
-    app.get(`/tags/${encodeURI(name)}`, post.index);
-  })
-})
 
 // feed
 app.get('/feed', post.feed);

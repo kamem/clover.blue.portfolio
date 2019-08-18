@@ -2,15 +2,6 @@ import settings from '../settings'
 import { ROBOT } from '../constants/robot'
 import _ from 'lodash'
 
-import {
-  qiitaItems,
-  flickrItems,
-  pixivItems,
-} from '../db'
-
-import * as database from '../db'
-
-
 export const sitemap = (req, res) => {
   res.set('Content-Type', 'text/xml')
   new Post(res, req, 'posts/sitemap', settings.title, '')
@@ -105,41 +96,16 @@ export const tag = (req, res) => {
   new Post(res, req, template, title, '')
 }
 
-export const entry = (req, res, path, name, title) => {
-  const uuid = req.route.path.replace(`/${path}/`, '')
+export const entry = (req, res, title) => {
   const template = 'posts/items/entry'
-  database[name].findOne({ uuid }).exec((err, post) => {
-    const title = `${title || post.title} - ${settings.title}`
-    new Post(res, req, template, title, post)
-  })
+  new Post(res, req, template, `${title} - ${settings.title}`)
 }
 
 const qiita = () => new Promise((resolve, reject) => {
-  qiitaItems.find({}).sort('-updated').exec((err, qiitaPosts) => {
-    if (err) {
-      reject(err)
-      return
-    }
-    resolve(qiitaPosts)
-  })
 })
 const flickr = () => new Promise((resolve, reject) => {
-  flickrItems.find({}).sort('-updated').exec((err, flickPosts) => {
-    if (err) {
-      reject(err)
-      return
-    }
-    resolve(flickPosts)
-  })
 })
 const pixiv = () => new Promise((resolve, reject) => {
-  pixivItems.find({}).sort('-updated').exec((err, pixivPosts) => {
-    if (err) {
-      reject(err)
-      return
-    }
-    resolve(pixivPosts)
-  })
 })
 const tumblr = () => new Promise((resolve, reject) => {
 })
@@ -147,22 +113,15 @@ const tumblr = () => new Promise((resolve, reject) => {
 const designs = () => new Promise((resolve, reject) => {
 })
 
-const Post = (res, req, template, title, item) => {
+const Post = (res, req, template, title) => {
   const ua = JSON.stringify(req.headers['user-agent'])
   const isRobot = _.some(ROBOT, (name) => ua.indexOf(name) >= 0)
   const robotDirectory = isRobot ? 'robot/' : ''
-  Promise.all([
-    qiita(),
-    flickr(),
-  ]).then(([qiita, flickr, pixiv, tumblr]) => {
-    res.render(
-      robotDirectory + template,
-      {
-        env: process.env.NODE_ENV,
-        title,
-        qiita,
-        flickr,
-      }
-    )
-  })
+  res.render(
+    robotDirectory + template,
+    {
+      env: process.env.NODE_ENV,
+      title,
+    }
+  )
 }

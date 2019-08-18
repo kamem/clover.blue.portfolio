@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import * as getDb from './getItems'
 import settings from '../settings'
+import { getItems } from '../api/Firestere'
 
 function commonRender(req, res, template, title) {
   res.render(
@@ -32,27 +32,33 @@ pages = pages.concat([
   {
     method: 'get',
     url: '/qiita/items',
-    complete: getDb.getQiitaItems
-  },
-  {
-    method: 'get',
-    url: '/qiita/tags',
-    complete: getDb.getQiitaTags
+    complete: (err, res) => {
+      getItems('qiita').then((data) => {
+        res.json({
+          items: data
+        })
+      })
+    }
   },
   {
     method: 'get',
     url: '/dropbox/items',
-    complete: getDb.getDropboxPaperItems
-  },
-  {
-    method: 'get',
-    url: '/dropbox/tags',
-    complete: getDb.getDropboxPaperTags
+    complete: (err, res) => {
+      res.json({
+        items: []
+      })
+    }
   },
   {
     method: 'get',
     url: '/instagram/items',
-    complete: getDb.getInstagramItems
+    complete: (err, res) => {
+      getItems('instagram').then((data) => {
+        res.json({
+          items: data
+        })
+      })
+    }
   }
 ])
 
