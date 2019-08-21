@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import express from 'express'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
@@ -105,19 +106,28 @@ pages.forEach((page) => {
   app[page.method](page.url, page.complete)
 })
 
-getItems('qiita', 'updated', 'desct').then((data) => {
-  data.forEach(({ uuid, title, tags }) => {
-    app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, title));
+const tags = (data) =>  {
+  _.chain(data).map('tags').flatten().uniq().value().forEach((name) => {
+      app.get(`/tags/${encodeURI(name)}`, post.index)
+  })
+}
+
+getItems('qiita').then((data) => {
+  tags(data)
+  data.forEach(({ uuid, title }) => {
+    app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, title))
   })
 })
-getItems('dropbox_paper', 'updated', 'desct').then((data) => {
-  data.forEach(({ uuid, title, tags }) => {
-    app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, title));
+getItems('dropbox_paper').then((data) => {
+  tags(data)
+  data.forEach(({ uuid, title }) => {
+    app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, title))
   })
 })
-getItems('instagram', 'created', 'desct').then((data) => {
-  data.forEach(({ uuid, title, tags }) => {
-    app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, title));
+getItems('instagram', 'created', 'desc').then((data) => {
+  tags(data)
+  data.forEach(({ uuid, title }) => {
+    app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, title))
   })
 })
 
