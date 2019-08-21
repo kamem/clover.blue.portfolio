@@ -105,21 +105,22 @@ pages.forEach((page) => {
   app[page.method](page.url, page.complete)
 })
 
-getItems('qiita').then((data) => {
-  data.forEach(({ uuid, title }) => {
+getItems('qiita', 'updated', 'desct').then((data) => {
+  data.forEach(({ uuid, title, tags }) => {
     app.get(`/items/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
-getItems('dropbox').then((data) => {
-  data.forEach(({ uuid, title }) => {
+getItems('dropbox_paper', 'updated', 'desct').then((data) => {
+  data.forEach(({ uuid, title, tags }) => {
     app.get(`/doc/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
-getItems('instagram').then((data) => {
-  data.forEach(({ uuid, title }) => {
+getItems('instagram', 'created', 'desct').then((data) => {
+  data.forEach(({ uuid, title, tags }) => {
     app.get(`/p/${uuid}`, (req, res) => post.entry(req, res, title));
   })
 })
+
 
 app.get('/photo', post.photo);
 app.get('/weblog', post.weblog);

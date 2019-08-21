@@ -44,8 +44,10 @@ pages = pages.concat([
     method: 'get',
     url: '/dropbox/items',
     complete: (err, res) => {
-      res.json({
-        items: []
+      getItems('dropbox_paper').then((data) => {
+        res.json({
+          items: data
+        })
       })
     }
   },
@@ -53,7 +55,7 @@ pages = pages.concat([
     method: 'get',
     url: '/instagram/items',
     complete: (err, res) => {
-      getItems('instagram').then((data) => {
+      getItems('instagram', 'created').then((data) => {
         res.json({
           items: data
         })

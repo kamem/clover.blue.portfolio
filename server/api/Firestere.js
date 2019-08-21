@@ -23,14 +23,15 @@ export const getItem = (uuid = null, itemsName) => {
   })
 }
 // 複数取得
-export const getItems = (itemsName) => new Promise((resolve, reject) => {
-  db.collection(itemsName).get().then((data) => {
+export const getItems = (itemsName, orderBy = 'updated', sort = 'desc') => new Promise((resolve, reject) => {
+  db.collection(itemsName).orderBy(orderBy, sort).get().then((data) => {
     const ary = []
     data.forEach((doc) => {
       ary.push(doc.data())
     })
     resolve(ary)
-  }).catch((err) => {
+  })
+  .catch((err) => {
     console.error(err)
     reject(err)
   })
