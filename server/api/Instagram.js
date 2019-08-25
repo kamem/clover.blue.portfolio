@@ -6,7 +6,7 @@ import qs from 'qs'
 import * as Firestore from './Firestere'
 import { generateResult } from './utils/generateResult'
 
-export default class QiitaApi {
+export default class InstagramApi {
   constructor() {
     this.name = 'instagram'
 
@@ -19,8 +19,6 @@ export default class QiitaApi {
       url: `${this.API_URI}users/self/media/recent/?${qs.stringify({ access_token: this.API_KEY })}`,
       method: 'GET',
     }
-
-    console.log(params)
 
     return new Promise((resolve, reject) => {
       request(params,
@@ -36,52 +34,47 @@ export default class QiitaApi {
   }
 
   saveEntries() {
-    return new Promise((resolve, reject) => {
-      this.fetchItems().then(({ data }) => {
-        if(!_.size(data)) {
-          return reject()
-        }
-        const items = _.map(data, ({
-            link,
-            caption,
-            created_time: created,
-            images: {
-              low_resolution: {
-                width: thumbnailWidth,
-                height: thumbnailHeight,
-                url: thumbnail
-              },
-              standard_resolution: {
-                width: imgWidth,
-                height: imgHeight,
-                url: img
-              }
+    return this.fetchItems().then(({ data }) => {
+      if(!_.size(data)) {
+        return
+      }
+      const items = _.map(data, ({
+          link,
+          caption,
+          created_time: created,
+          images: {
+            low_resolution: {
+              width: thumbnailWidth,
+              height: thumbnailHeight,
+              url: thumbnail
             },
-            tags
-          }) => ({
-            uuid: link.split('/')[4],
-            created: moment(parseInt(created, 10) * 1000).unix(),
-            body: caption && caption.text,
-            thumbnail,
-            thumbnailWidth,
-            thumbnailHeight,
-            img,
-            imgWidth,
-            imgHeight,
-            tags
-          })
-        )
+            standard_resolution: {
+              width: imgWidth,
+              height: imgHeight,
+              url: img
+            }
+          },
+          tags
+        }) => ({
+          uuid: link.split('/')[4],
+          created: moment(parseInt(created, 10) * 1000).unix(),
+          body: caption && caption.text,
+          thumbnail,
+          thumbnailWidth,
+          thumbnailHeight,
+          img,
+          imgWidth,
+          imgHeight,
+          tags
+        })
+      )
 
-        return Promise.all([
-          Firestore.saveEntriesEvents(items, this.name),
-          [],
-          Firestore.removeItems(items, this.name),
-          [],
-        ]).then((values) => resolve(generateResult(values)))
-      }).catch((err) => {
-        console.error(err)
-        return reject(err)
-      })
+      return Promise.all([
+        Firestore.saveEntriesEvents(items, this.name),
+        Firestore.removeItems(items, this.name),
+      ]).then((values) => generateResult(values))
+    }).catch((err) => {
+      console.error(err)
     })
   }
 }

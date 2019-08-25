@@ -38,40 +38,35 @@ export default class QiitaApi {
   }
 
   saveEntries() {
-    return new Promise((resolve, reject) => {
-      this.fetchItems().then((responseBody) => {
-        if(!_.size(responseBody)) {
-          return reject()
-        }
-        const items = _.map(responseBody, ({
-            id: uuid,
-            user: { id: user },
-            created_at: created,
-            updated_at: updated,
-            title,
-            rendered_body: body,
-            tags
-          }) => ({
-            uuid,
-            user,
-            created: moment(created).unix(),
-            updated: moment(updated).unix(),
-            title,
-            body,
-            tags: _.map(tags, 'name')
-          })
-        )
+    return this.fetchItems().then((responseBody) => {
+      if(!_.size(responseBody)) {
+        return
+      }
+      const items = _.map(responseBody, ({
+          id: uuid,
+          user: { id: user },
+          created_at: created,
+          updated_at: updated,
+          title,
+          rendered_body: body,
+          tags
+        }) => ({
+          uuid,
+          user,
+          created: moment(created).unix(),
+          updated: moment(updated).unix(),
+          title,
+          body,
+          tags: _.map(tags, 'name')
+        })
+      )
 
-        return Promise.all([
-          Firestore.saveEntriesEvents(items, this.name),
-          [],
-          Firestore.removeItems(items, this.name),
-          [],
-        ]).then((values) => resolve(generateResult(values)))
-      }).catch((err) => {
-        console.error(err)
-        return reject(err)
-      })
+      return Promise.all([
+        Firestore.saveEntriesEvents(items, this.name),
+        Firestore.removeItems(items, this.name),
+      ]).then((values) => generateResult(values))
+    }).catch((err) => {
+      console.error(err)
     })
   }
 }

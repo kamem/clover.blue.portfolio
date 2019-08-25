@@ -45,8 +45,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   secret: '929nfwamicl',
-}
-));
+}));
 app.use(csrf());
 app.use((req, res, next) => {
   res.locals.csrftoken = req.csrfToken();
@@ -132,11 +131,11 @@ getItems('instagram', 'created', 'desc').then((data) => {
 })
 
 
-app.get('/photo', post.photo);
-app.get('/weblog', post.weblog);
-app.get('/illust', post.illust);
-app.get('/diary', post.diary);
-app.get('/design', post.design);
+app.get('/photo', post.photo)
+app.get('/weblog', post.weblog)
+app.get('/illust', post.illust)
+app.get('/diary', post.diary)
+app.get('/design', post.design)
 
 
 // feed

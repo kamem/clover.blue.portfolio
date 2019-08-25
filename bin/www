@@ -3,5 +3,5 @@ import app from '../server/app.js'
 import settings from '../server/settings'
 
 const server = app.listen(settings.port, () => {
-  console.log(`Express server listening on port ${server.address().port}`);
-});
+  console.info(`Express server listening on port ${server.address().port}`);
+})

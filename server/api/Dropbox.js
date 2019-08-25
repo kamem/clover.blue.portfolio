@@ -159,40 +159,35 @@ export default class DropboxApi {
   }
 
   saveEntries() {
-    return new Promise((resolve, reject) => {
-      this.fetchItems().then((responseBody) => {
-        const items = _.map(responseBody, (
-          {
-            id,
-            headers: {
-              'dropbox-api-result': resilt
-            },
-            metaData: {
-              created_date: created,
-              last_updated_date: updated
-            },
-            body,
-            tags
-          }) => ({
-            uuid: id,
-            created: moment(created).unix(),
-            updated: moment(updated).unix(),
-            title: JSON.parse(resilt).title,
-            body: marked(body.replace(/^#.*\n/, '').replace(/\*\*(.+)\*\*/g, '### $1')),
-            tags
-          })
-        )
+    return this.fetchItems().then((responseBody) => {
+      const items = _.map(responseBody, (
+        {
+          id,
+          headers: {
+            'dropbox-api-result': resilt
+          },
+          metaData: {
+            created_date: created,
+            last_updated_date: updated
+          },
+          body,
+          tags
+        }) => ({
+          uuid: id,
+          created: moment(created).unix(),
+          updated: moment(updated).unix(),
+          title: JSON.parse(resilt).title,
+          body: marked(body.replace(/^#.*\n/, '').replace(/\*\*(.+)\*\*/g, '### $1')),
+          tags
+        })
+      )
 
-        return Promise.all([
-          Firestore.saveEntriesEvents(items, this.name),
-          [],
-          Firestore.removeItems(items, this.name),
-          [],
-        ]).then((values) => resolve(generateResult(values)))
-      }).catch((err) => {
-        console.log(err)
-        return reject(err)
-      })
+      return Promise.all([
+        Firestore.saveEntriesEvents(items, this.name),
+        Firestore.removeItems(items, this.name),
+      ]).then((values) => generateResult(values))
+    }).catch((err) => {
+      console.log(err)
     })
   }
 }
