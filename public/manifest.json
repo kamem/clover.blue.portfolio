@@ -1,0 +1,37 @@
+{
+    "name": "clover.blue",
+    "short_name": "clover.blue",
+    "version": 1,
+    "icons": [
+        {
+            "src": "/icons/48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "/icons/96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/icons/192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/icons/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#3bbfce",
+    "theme_color": "#3bbfce",
+    "description": "とあるフロントエンドの技術日記",
+    "dir": "ltr",
+    "lang": "ja-jp",
+    "related_applications": [],
+    "prefer_related_applications": false
+}

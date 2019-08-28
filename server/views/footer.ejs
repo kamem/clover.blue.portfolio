@@ -3,5 +3,13 @@
 <% } else { %>
 <script src="/js/bundle.js"></script>
 <% } %>
+<script>
+navigator.serviceWorker.register("/serviceWorker.js")
+.then((registration) => {
+console.log("serviceWorker registed.")
+}).catch((error) => {
+console.warn("serviceWorker error.", error)
+})
+</script>
 </body>
 </html>
