@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "classnames": "2.2.3",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "humps": "^0.6.0",
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.0.0",
